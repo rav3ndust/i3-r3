@@ -1,7 +1,7 @@
-# i3-r3
+# nightshadeWM
 =====================================================
 
-i3-r3 is rav3ndust's personal fork of i3, which is a tiling window manager for X11.
+**nightshadeWM** is rav3ndust's personal fork of i3, which is a tiling window manager for X11.
 
 For more information about i3, please see [the project's website](https://i3wm.org/) and [online documentation](https://i3wm.org/docs/). I'll be updating docs for this fork soon.
 
