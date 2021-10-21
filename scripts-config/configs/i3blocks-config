@@ -1,0 +1,211 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+#command=/usr/share/i3blocks/$BLOCK_NAME
+separator_block_width=15
+separator=true
+#markup=none
+
+# main stuff (top bar)
+# this is the "nightshade launcher", where we will be launching applications from. 
+# the user can select from a pre-populated custom dmenu list of apps that have .desktop files on their system. 
+# think of it as the "Start Menu" of r3-wm.
+[app launcher]
+full_text=nightshade launcher
+command=i3-dmenu-desktop --dmenu='dmenu -i -nb black -nf purple -sb green -sf red -l 10 -p "nightshader - Applications List:"'
+#interval=persist
+align=center
+min_width=150
+
+[separator]
+
+# this is the file browser block. 
+# at the moment, it spawns thunar, the lightweight xfce file manager. I might go even more lightweight in future updates. 
+[file browser]
+full_text=files
+command=thunar
+align=center
+min_width=100
+
+[separator]
+
+# this block spawns pavucontrol for controlling audio sources. I hope to have a better solution in the future. 
+[audio control]
+full_text=audio controls
+command=pavucontrol
+align=center
+min_width=150
+
+[separator]
+
+# need to work on this one. commented out till I can debug it. 
+#[lock screen]
+#full_text=lockscreen
+#command=locker
+#align=center
+#min_width=75
+
+[separator]
+
+# need to build an easy way for the user to logout if they wish. 
+[logout]
+full_text=log out 
+command=kitty ~/Projects/i3-r3/logout.sh
+align=center
+min_width=100
+
+[separator]
+
+# this button will shutdown the machine for the user after they confirm that they want it to happen. 
+[shutdown]
+full_text=shut down
+command=kitty ~/Projects/i3-r3/shutdown.sh
+align=center
+min_width=150
+# Volume indicator
+#
+# The first parameter sets the step (and units to display)
+# The second parameter overrides the mixer selection
+# See the script for details.
+#[volume]
+#label=VOL
+#label=♪
+#instance=Master
+#instance=PCM
+#interval=once
+#signal=10
+
+# Memory usage
+#
+# The type defaults to "mem" if the instance is not specified.
+#[memory]
+#label=MEM
+#separator=false
+#interval=30
+
+#[memory]
+#label=SWAP
+#instance=swap
+#separator=false
+#interval=30
+
+# Disk usage
+#
+# The directory defaults to $HOME if the instance is not specified.
+# The script may be called with a optional argument to set the alert
+# (defaults to 10 for 10%).
+#[disk]
+#label=HOME
+#instance=/mnt/data
+#interval=30
+
+# Network interface monitoring
+#
+# If the instance is not specified, use the interface used for default route.
+# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
+#[iface]
+#instance=wlan0
+#color=#00FF00
+#interval=10
+#separator=false
+
+#[wifi]
+#instance=wlp3s0
+#interval=10
+#separator=false
+
+#[bandwidth]
+#instance=eth0
+#interval=5
+
+# CPU usage
+#
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+#[cpu_usage]
+#label=CPU
+#interval=10
+#min_width=CPU: 100.00%
+#separator=false
+
+#[load_average]
+#interval=10
+
+# Battery indicator
+#
+# The battery instance defaults to 0.
+#[battery]
+#label=BAT
+#label=⚡
+#instance=1
+#interval=30
+
+# Date Time
+#
+#[time]
+#command=date '+%Y-%m-%d %H:%M:%S %A'
+#interval=5
+
+# Generic media player support
+#
+# This displays "ARTIST - SONG" if a music is playing.
+# Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
+#[mediaplayer]
+#instance=spotify
+#interval=5
+#signal=10
+
+# OpenVPN support
+#
+# Support multiple VPN, with colors.
+#[openvpn]
+#interval=20
+
+# Temperature
+#
+# Support multiple chips, though lm-sensors.
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+#[temperature]
+#label=TEMP
+#interval=10
+
+# Key indicators
+#
+# Add the following bindings to i3 config file:
+#
+# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+#[keyindicator]
+#instance=CAPS
+#interval=once
+#signal=11
+
+#[keyindicator]
+#instance=NUM
+#interval=once
+#signal=11
+
