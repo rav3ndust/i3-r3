@@ -1,5 +1,5 @@
 #!/bin/bash
-# shutdown utility for r3-wm
+# shutdown utility for nightshadeWM
 ##############
 # define functions
 ###############
