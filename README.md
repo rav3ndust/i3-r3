@@ -3,18 +3,28 @@
 
 **nightshadeWM** is rav3ndust's personal fork of i3, which is a tiling window manager for X11.
 
+=====
+
+## minimal and lightweight 
+
 ![nightshadeWM desktop](img/desktop.png) 
 ###### minimal desktop and handy shortcuts at the top for common tasks - for those unfortunate occasions where you have to reach for the mouse
 
 Easy to use and easily extensible. Takes up very little of precious system resources, and gives you a minimal but efficient keyboard-driven environment, so you can focus less on messing around with bells and whistles found on prominent desktop environments and focus more on the task at hand. It *is* a tiling window manager, and these sorts of WMs are well-loved for how efficient and extensible they can be. 
 
 =====
+
+## more resources for your stuff
+
 ![browsing the web in nightshadeWM](img/browsingweb.png)
 ###### browse the web and run all of your favorite applications in a minimal environment 
 
 Just open up the **nightshade launcher** at the top panel or use the keyboard shortcut that launches a custom **dmenu** script, and you can search for and launch your applications with ease. Think of it as your miniature Start panel. 
 
 =====
+
+## organize your windows with ease
+
 ![tiling with nightshadeWM](img/tiling.png)
 ###### automate the organization of the windows on your screen
 
