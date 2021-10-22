@@ -1,35 +1,40 @@
 #!/bin/bash
-#####
-# logout script for nightshadeWM
-
-# ask the user for the input
-dialog --title "Log Out" --backtitle "nightshadeWM Logout" --yesno "Hi, $USER! Are you sure you would like to log off of your computer?" 0 0
-
+# shutdown utility for r3-wm
+##############
 # define functions
-#######################
-# this function runs when the user selects YES on the dialog box
-function yesLogout {
-	notify-send "nightshadeWM Logout" "logging out in 5 seconds..."
-	sleep 5 
-	loginctl kill-user $USER
+###############
+# the first function "shutDownAlert" will ask the user if they are sure they want to shut doen 
+# if they select YES, the system closes down. if NO, it goes back to the WM. 
+function shutDownAlert {
+	dialog --title "Shut Down" --backtitle "nightshadeWM Shutdown" --yesno "Are you sure you would like to shut down your machine?" 0 0
 }
-# this function runs when the user clicks NO on the dialog box
-function noLogout {
-	notify-send "nightshadeWM Logout" "Not logging out."
+# function 2 - "shutDown" 
+# notifies the user the machine will shut down in 1 min, and exits all processes before shutting down
+function shutDown {
+	notify-send "nightshadeWM System Notification" "$HOSTNAME will shut down in one minute."
+	shutdown -h 1 
+}
+# these run if the user hits "NO" or the esc key
+function dontShutDown {
+	notify-send "nightshadeWM System Notification" "You chose not to shut down your computer."
 	exit
 }
-# this function runs if the user hits the esc key or cancels in another way
-function escSeq {
-	notify-send "nightshadeWM Logout" "Logout cancelled by user input"
+# user-cancellation 
+function escPressed {
+	notify-send "nightshadeWM System Notification" "Shutdown cancelled by user input."
 	exit
 }
+# run the script
+# ask the user for input with a dialog --yesno box 
+dialog --title "Shut Down" --backtitle "nightshadeWM Shutdown" --yesno "Are you sure you would like to shut down your machine?" 0 0
+
 # get the exit status. 
 # an exit status of 0 indicates a YES answer. 
 # an exit status of 1 means the user hit the NO answer. 
 # an exit status of 255 indicates the user hit the Esc key. 
-userChoice=$?
-case $userChoice in 
-	0) yesLogout;;
-	1) noLogout;;
-	255) escSeq;;
+shutdownChoice=$?
+case $shutdownChoice in 
+	0) shutDown;;
+	1) dontShutDown;;
+	255) escPressed;;
 esac
