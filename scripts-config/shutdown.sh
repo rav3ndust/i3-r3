@@ -26,8 +26,7 @@ function escPressed {
 }
 # run the script
 # ask the user for input with a dialog --yesno box 
-dialog --title "Shut Down" --backtitle "nightshadeWM Shutdown" --yesno "Are you sure you would like to shut down your machine?" 0 0
-
+shutDownAlert
 # get the exit status. 
 # an exit status of 0 indicates a YES answer. 
 # an exit status of 1 means the user hit the NO answer. 
