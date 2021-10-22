@@ -30,6 +30,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# we currently use dunst to handle system notifications. 
+# make sure it starts on launch, because apps that rely on notifications might hang. 
+exec --no-startup-id dunst 
+
+# we use nitrogen for wallpaper management. 
 # autostart nitrogen for the wallpaper. 
 # we should make a command for a default wallpaper.
 exec --no-startup-id nitrogen --restore
@@ -152,7 +157,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit command detected. Are you sure you would like to logout of nightshadeWM? This X session will be closed.' -B 'Yes, log out of nightshadeWM' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
