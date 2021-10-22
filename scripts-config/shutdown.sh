@@ -1,36 +1,35 @@
 #!/bin/bash
-# shutdown utility for nightshadeWM
-##############
+#####
+# logout script for nightshadeWM
+
+# ask the user for the input
+dialog --title "Log Out" --backtitle "nightshadeWM Logout" --yesno "Hi, $USER! Are you sure you would like to log off of your computer?" 0 0
+
 # define functions
-###############
-# function 1 - "shutDown" 
-# notifies the user the machine will shut down in 1 min, and exits all processes before shutting down
-function shutDown {
-	notify-send "nightshadeWM System Notification" "$HOSTNAME will shut down in one minute."
-	shutdown +1	
+#######################
+# this function runs when the user selects YES on the dialog box
+function yesLogout {
+	notify-send "nightshadeWM Logout" "logging out in 5 seconds..."
+	sleep 5 
+	loginctl kill-user $USER
 }
-
-# these run if the user hits "NO" or the esc key
-function dontShutDown {
-	notify-send "nightshadeWM System Notification" "You chose not to shut down your computer."
+# this function runs when the user clicks NO on the dialog box
+function noLogout {
+	notify-send "nightshadeWM Logout" "Not logging out."
 	exit
 }
- 
-function escPressed {
-	notify-send "nightshadeWM System Notification" "Shutdown cancelled by user input."
+# this function runs if the user hits the esc key or cancels in another way
+function escSeq {
+	notify-send "nightshadeWM Logout" "Logout cancelled by user input"
 	exit
 }
-# run the script
-# ask the user for input with a dialog --yesno box 
-dialog --title "Shut Down" --backtitle "nightshadeWM Shutdown" --yesno "Are you sure you would like to shut down your machine?" 0 0
-
 # get the exit status. 
 # an exit status of 0 indicates a YES answer. 
 # an exit status of 1 means the user hit the NO answer. 
 # an exit status of 255 indicates the user hit the Esc key. 
-shutdownChoice=$?
-case $shutdownChoice in 
-	0) shutDown;;
-	1) dontShutDown;;
-	255) escPressed;;
+userChoice=$?
+case $userChoice in 
+	0) yesLogout;;
+	1) noLogout;;
+	255) escSeq;;
 esac
