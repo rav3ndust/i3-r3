@@ -1,4 +1,4 @@
-# nightshadeWM
+# nightshade window manager
 **=====================================================**
 
 **nightshadeWM** is rav3ndust's personal fork of i3, which is a tiling window manager for X11.
