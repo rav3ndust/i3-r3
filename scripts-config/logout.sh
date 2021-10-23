@@ -10,7 +10,7 @@ function alertBox {
 	dialog --title "Log Out" --backtitle "nightshadeWM Logout" --yesno "Hi, $USER! Are you sure you would like to log off of your computer?" 0 0
 }
 # this function runs when the user selects YES on the dialog box
-# i3exit script runs after 5 secs for a clean logout to the loginmanager
+# i3exit script runs after 5 secs 
 function yesLogout {
 	notify-send "nightshadeWM Logout" "logging out in 5 seconds..."
 	sleep 5 
