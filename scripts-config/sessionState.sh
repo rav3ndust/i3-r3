@@ -9,16 +9,6 @@
 : ${SESSIONSTATE_LOGOUT=c}
 : ${SESSIONSTATE_SHUTDOWN=d}
 #####################
-# create a dialog menu to present interactive menus for the user to make a selection. 
-#####################
-dialog --title "Session State" --backtitle "Session State Menu" \
---radiolist "Hi, $USER! What would you like to do today?" 100 50 100 \
-	"a" "Return to the home screen." ON  \
-	"b" "Lock the current session." OFF  \
-	"c" "Log out of the current session" OFF  \
-	"d" "Shut down $HOSTNAME." OFF
-
-#####################
 # define some functions
 #####################
 # This is the function that will run when the "Session State" button is pressed. 
@@ -54,7 +44,7 @@ function shutDown {            # this function will shut the machine down when t
 #####################
 # other misc system functions
 #####################
-function passwordCheck {
+function passwordCheck {		# not finished - passwordCheck will ask user for a password before executing "shutDown" and "logOut" functions
 	dialog --title "Password Check" --backtitle "Security Input" --passwordbox 
 }
 #####################
