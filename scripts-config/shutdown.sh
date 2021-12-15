@@ -3,7 +3,7 @@
 ##############
 # define functions
 ###############
-# the first function "shutDownAlert" will ask the user if they are sure they want to shut doen 
+# the first function "shutDownAlert" will ask the user if they are sure they want to shut down 
 # if they select YES, the system closes down. if NO, it goes back to the WM. 
 function shutDownAlert {
 	dialog --title "Shut Down" --backtitle "nightshadeWM Shutdown" --yesno "Are you sure you would like to shut down your machine?" 0 0
