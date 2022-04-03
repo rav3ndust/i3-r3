@@ -4,12 +4,19 @@
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
 #
+# original config can usually be found in ~/.config/i3/config
 
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+
+# for window title bars
+for_window [class="^.*"] border pixel
+# for border colors
+client.focused #555555 #555555 #ffffff #2e9ef4     #CC0000
+
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -62,7 +69,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec dmenu_run -nb black -nf purple -sb green -sf red -l 15 -p "nightshader - choose an item:"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
+# installed. (should come preinstalled with i3)
 bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -nb black -nf purple -sb green -sf red -l 10 -p "nightshader - Applications List:"'
 
 # change focus
@@ -193,7 +200,7 @@ bar {
         status_command i3status 
 }
 
-bar {
-	position top
-	status_command i3blocks ~/etc/i3r3blocks.conf
-}
+# bar {
+#	position top
+#	status_command i3blocks ~/etc/i3r3blocks.conf
+#}
