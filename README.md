@@ -65,3 +65,14 @@ You're of course more than free to contribute to my fork, but if you want to che
 If you like **wiredWM** and feel some burning desire to help fund it, please direct your contributions towards the parent project, **i3**. WIthout it, this project would not be able to exist! 
 
 *close the world, enter the nExt* ;)
+
+### credits 
+
+**wiredWM** is a fork of [i3](https://github.com/i3/i3), the most glorious window manager ever made.
+
+Some of our other major components are: 
+
+- [flameshot](https://github.com/flameshot-org/flameshot)
+- [nm-applet](https://github.com/pavlix/nm-applet)
+- [volumeicon](https://github.com/Maato/volumeicon)
+- various components from [suckless](https://suckless.org).
