@@ -3,7 +3,7 @@
 
 **wiredWM** is rav3ndust's personal fork of i3, which is a tiling window manager for X11.
 
-![wiredWM](imgs/wiredWM_flameshot2)
+![wiredWM](imgs/wiredWM_flameshot2.png)
 
 =====
 
