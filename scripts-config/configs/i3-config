@@ -62,8 +62,10 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
+# start a terminal. 
+# Our two installed terminal emulators are "kitty" and "stterm." Both are lightweight.
 bindsym $mod+Return exec kitty
+#bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -167,7 +169,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit command detected. Are you sure you would like to logout of nightshadeWM? This X session will be closed.' -B 'Yes, log out of nightshadeWM' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit command detected. Are you sure you would like to logout of wiredWM? This X session will be closed.' -B 'Yes, log out of nightshadeWM' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
