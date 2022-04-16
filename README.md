@@ -48,8 +48,8 @@ A bunch of floating windows can become difficult to manage in the middle of a wo
 
 For more information about i3, please see [the project's website](https://i3wm.org/) and [online documentation](https://i3wm.org/docs/). I'll be updating docs for this fork soon. 
 
-You're of course more than free to contribute to my fork, but if you want to check out more information about contributing to the OG i3, please see [CONTRIBUTING.md](.github/CONTRIBUTING.md).
-
-*close the world, enter the nExt* ;) 
+You're of course more than free to contribute to my fork, but if you want to check out more information about contributing to the OG i3, please see [CONTRIBUTING.md](.github/CONTRIBUTING.md). 
 
 If you like **wiredWM** and feel some desire to help fund it, please direct your contributions towards the parent project, **i3**. WIthout it, this project would not be able to exist! 
+
+*close the world, enter the nExt* ;)
