@@ -24,7 +24,9 @@ Easy to use and easily extensible. Takes up very little of precious system resou
 ![browsing the web in wiredWM](imgs/wiredWM_flameshot3.png)
 ###### browse the web and run all of your favorite applications in a minimal environment 
 
-Just open up the **nightshade launcher** at the top panel or use the keyboard shortcut that launches a custom **dmenu** script, and you can search for and launch your applications with ease. Think of it as your miniature Start panel. 
+Just open up the **nightshade launcher** by pressing *crtl+d* - that launches a custom **dmenu** script, and you can search for and launch your applications with ease. Think of it as your miniature Start panel.
+
+For a general list of applications, you can also press *ctrl+Shift+a* and scroll through to select one. Anything that has a desktop entry will appear here. 
 
 =====
 
@@ -47,12 +49,12 @@ A bunch of floating windows can become difficult to manage in the middle of a wo
 - a custom **conky** config
 - various other assorted things
 
-### more information coming as i continue working on nightshadeWM! :) 
+### more 
 
 For more information about i3, please see [the project's website](https://i3wm.org/) and [online documentation](https://i3wm.org/docs/). I'll be updating docs for this fork soon. 
 
 You're of course more than free to contribute to my fork, but if you want to check out more information about contributing to the OG i3, please see [CONTRIBUTING.md](.github/CONTRIBUTING.md). 
 
-If you like **wiredWM** and feel some desire to help fund it, please direct your contributions towards the parent project, **i3**. WIthout it, this project would not be able to exist! 
+If you like **wiredWM** and feel some burning desire to help fund it, please direct your contributions towards the parent project, **i3**. WIthout it, this project would not be able to exist! 
 
 *close the world, enter the nExt* ;)
