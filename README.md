@@ -27,7 +27,7 @@ Just open up the **nightshade launcher** at the top panel or use the keyboard sh
 
 ## organize your windows with ease
 
-![tiling with nightshadeWM](imgs/wiredWM_flameshot4.png)
+![tiling with wiredWM](imgs/wiredWM_flameshot4.png)
 ###### automate the organization of the windows on your screen
 
 A bunch of floating windows can become difficult to manage in the middle of a workflow - which is another reason a tiling window manager can really come in handy. Being built on top of the much-loved **i3**, **wiredWM** allows you to easily tile or float your windows with a quick keyboard shortcut. 
@@ -38,6 +38,7 @@ A bunch of floating windows can become difficult to manage in the middle of a wo
 
 **wiredWM** also contains: 
 
+- *nightshader*, a custom **dmenu** for running commands and launching applications.
 - scripts for lock screen with password via **i3lock-fancy**
 - my own custom scripts built on top of [suckless's](https://suckless.org) **surf** browser.
 - a custom **conky** config
