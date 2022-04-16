@@ -13,9 +13,15 @@
 ## minimal and lightweight 
 
 ![wiredWM desktop](imgs/wiredWM_flameshot1.png) 
-###### minimal desktop and handy shortcuts at the top for common tasks - for those unfortunate occasions where you have to reach for the mouse
+###### minimal desktop and keyboard shortcuts quick efficiency. clickable icons are located at the bottom of the status bar for common tasks- for those unfortunate occasions where you have to reach for the mouse
 
 Easy to use and easily extensible. Takes up very little of precious system resources, and gives you a minimal but efficient keyboard-driven environment, so you can focus less on messing around with bells and whistles found on prominent desktop environments and focus more on the task at hand. It *is* a tiling window manager, and these sorts of WMs are well-loved for how efficient and extensible they can be. 
+
+**Clickable launchers for:**
+
+- Sound control (handled through `volumeicon-alsa`).
+- Screenshot utility (handles via `flameshot`.)
+- Network/Wi-Fi manager (handles via `nm-applet`.)
 
 =====
 
@@ -48,6 +54,7 @@ A bunch of floating windows can become difficult to manage in the middle of a wo
 - my own custom scripts built on top of [suckless's](https://suckless.org) **surf** browser.
 - a custom **conky** config
 - various other assorted things
+- custom keyboard shortcuts for some of the scripts we've built in
 
 ### more 
 
