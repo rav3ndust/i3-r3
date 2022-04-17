@@ -209,7 +209,7 @@
     sticky_history = yes
 
     # Maximum amount of notifications kept in history
-    history_length = 15
+    history_length = 20
 
     ### Misc/Advanced ###
 
@@ -297,7 +297,7 @@
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
     frame_color = "#A020F0"
-    foreground = "#3B7C87"
+    foreground = "#FF10F0"
     background = "#191311"
     #background = "#2B313C"
     timeout = 4
@@ -306,7 +306,7 @@
 
 [urgency_normal]
     frame_color = "#A020F0"
-    foreground = "#5B8234"
+    foreground = "#FF10F0"
     background = "#191311"
     #background = "#2B313C"
     timeout = 6
@@ -315,7 +315,7 @@
 
 [urgency_critical]
     frame_color = "#A020F0"
-    foreground = "#B7472A"
+    foreground = "#FF10F0"
     background = "#191311"
     #background = "#2B313C"
     timeout = 8
