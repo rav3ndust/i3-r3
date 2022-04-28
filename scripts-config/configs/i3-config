@@ -213,6 +213,3 @@ bar {
 
 # custom conky displaying time, a message, and date in US format:
 exec --no-startup-id conky
-
-# (this is only for the Rainbow Room machine):
-exec_always --no-startup-id $HOME/.screenlayout/rainbowRoom.sh
