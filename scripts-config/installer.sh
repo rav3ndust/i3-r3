@@ -18,7 +18,8 @@
 #	- users can set their favorite terminal in the i3 config file.
 # - we have custom scripts built on top of surf browser called "nightsurf"
 # - we also have a custom conky, so we need the *conky* package.
-# - we use *vim* for text editing. 
+# - we use *vim* for text editing.
+# - *suckless-tools* is a collection of small software tools from the Suckless community.
 ###############################
 i3_CONFIG_1_LOCATION="/etc/i3/config"
 i3_CONFIG_2_LOCATION="~/.config/i3/config"
@@ -33,7 +34,7 @@ VIM_CONFIG="~/.vimrc"
 i3_INSTALL=$(sudo apt install i3 i3lock-fancy -y)
 WIREDWM_CLONE=$(git clone https://github.com/rav3ndust/wiredWM)
 UPDATER=$(sudo apt update)
-WIRED_PACKS=$(sudo apt install nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky vim -y)
+WIRED_PACKS=$(sudo apt install nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky suckless-tools vim -y)
 ################################
 function sleepy() {	# this function sleeps sys 1 sec
 	sleep 1
