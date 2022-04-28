@@ -1,4 +1,5 @@
 #!/bin/bash
+# installer.sh -> for wiredWM
 # This is the installer script for wiredWM. 
 # Important info for config files: 
 # - i3 config lives at /etc/i3/config and ~/.config/i3/config
@@ -17,6 +18,7 @@
 #	- users can set their favorite terminal in the i3 config file.
 # - we have custom scripts built on top of surf browser called "nightsurf"
 # - we also have a custom conky, so we need the *conky* package.
+# - we use *vim* for text editing. 
 ###############################
 i3_CONFIG_1_LOCATION="/etc/i3/config"
 i3_CONFIG_2_LOCATION="~/.config/i3/config"
@@ -27,10 +29,11 @@ CONKY_CONFIG_LOCATION="etc/conky/conky.conf"
 WIRED_CONKY_CONFIG="wiredWM/scripts-config/configs/conky.conf"
 DUNSTRC_CONFIG=""
 WIRED_DUNSTRC="wiredWM/scripts-config/configs/dunstrc" 
+VIM_CONFIG="~/.vimrc"
 i3_INSTALL=$(sudo apt install i3 i3lock-fancy -y)
 WIREDWM_CLONE=$(git clone https://github.com/rav3ndust/wiredWM)
 UPDATER=$(sudo apt update)
-WIRED_PACKS=$(sudo apt install nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky)
+WIRED_PACKS=$(sudo apt install nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky vim -y)
 ################################
 function sleepy() {	# this function sleeps sys 1 sec
 	sleep 1
