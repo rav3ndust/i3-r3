@@ -10,7 +10,8 @@
 # Some notes on the packages we need to download on installation: 
 # - we use *flameshot* for taking screenshots.
 # - we use *nm-applet* for handling networks - i3 ships with this.
-# - we use *nitrogen* for handling wallpaper selection and restoring.
+# - we use *nitrogen* for handling wallpaper selection and restoring with GUI.
+# - we use *feh* for handling wallpapers through CLI.
 # - we use *arandr* for graphical display management.
 # - we use *volumeicon-alsa* for a GUI-friendly way of volume management.
 # - we use *kitty* and *stterm* for lightweight terminals.
@@ -32,10 +33,7 @@ DUNSTRC_CONFIG_LOCATION_1="/etc/dunst/dunstrc"
 DUNSTRC_CONFIG_LOCATION_2="$HOME/.config/dunst/dunstrc"
 WIRED_DUNSTRC="$HOME/wiredWM/scripts-config/configs/dunstrc" 
 VIM_CONFIG="$HOME/.vimrc"
-WIRED_VIM_CONFIG="vimrc"
-#i3_INSTALL=$(sudo apt-get install i3 i3lock-fancy -y)
-#UPDATER=$(sudo apt-get update)
-#WIRED_PACKS=$(sudo apt-get install feh nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky suckless-tools vim -y) 
+WIRED_VIM_CONFIG="vimrc" 
 DEF_WP_LOCATION="$HOME/wiredWM/wp/nExt.png"
 ################################
 function makeFolders() {
