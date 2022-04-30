@@ -22,41 +22,60 @@
 # - *suckless-tools* is a collection of small software tools from the Suckless community.
 ###############################
 i3_CONFIG_1_LOCATION="/etc/i3/config"
-i3_CONFIG_2_LOCATION="~/.config/i3/config"
-WIRED_i3_CONFIG="wiredWM/scripts-config/configs/i3-config"
+i3_CONFIG_2_LOCATION="$HOME/.config/i3/config"
+WIRED_i3_CONFIG="$HOME/wiredWM/scripts-config/configs/i3-config"
 i3STATUS_LOCATION="/etc/i3status.conf"
-WIRED_i3STATUS_CONFIG="wiredWM/scripts-config/configs/i3status-config"
-CONKY_CONFIG_LOCATION="etc/conky/conky.conf"
-WIRED_CONKY_CONFIG="wiredWM/scripts-config/configs/conky.conf"
+WIRED_i3STATUS_CONFIG="$HOME/wiredWM/scripts-config/configs/i3status-config"
+CONKY_CONFIG_LOCATION="/etc/conky/conky.conf"
+WIRED_CONKY_CONFIG="$HOME/wiredWM/scripts-config/configs/conky.conf"
 DUNSTRC_CONFIG_LOCATION_1="/etc/dunst/dunstrc"
-DUNSTRC_CONFIG_LOCATION_2="~/.config/dunst/dunstrc"
-WIRED_DUNSTRC="wiredWM/scripts-config/configs/dunstrc" 
-VIM_CONFIG="~/.vimrc"
-WIRED_VIM_CONFIG="~/wiredWM/scripts-config/configs/vimrc"
-i3_INSTALL=$(sudo apt install i3 i3lock-fancy -y)
-UPDATER=$(sudo apt update)
-WIRED_PACKS=$(sudo apt install nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky suckless-tools vim -y) 
-DEF_WP_LOCATION="~/wiredWM/wp/nExt.png"
+DUNSTRC_CONFIG_LOCATION_2="$HOME/.config/dunst/dunstrc"
+WIRED_DUNSTRC="$HOME/wiredWM/scripts-config/configs/dunstrc" 
+VIM_CONFIG="$HOME/.vimrc"
+WIRED_VIM_CONFIG="vimrc"
+#i3_INSTALL=$(sudo apt-get install i3 i3lock-fancy -y)
+#UPDATER=$(sudo apt-get update)
+#WIRED_PACKS=$(sudo apt-get install feh nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky suckless-tools vim -y) 
+DEF_WP_LOCATION="$HOME/wiredWM/wp/nExt.png"
 ################################
-function sleepy() {	# this function sleeps sys 1 sec
+function makeFolders() {
+	sudo mkdir /etc/i3 && sudo touch /etc/i3/config
+	sudo mkdir $HOME/.config/i3 && sudo touch $HOME/.config/i3/config
+	sudo touch /etc/i3status.conf
+	sudo mkdir /etc/dunst && sudo touch /etc/dunst/dunstrc
+	sudo mkdir $HOME/.config/dunst && sudo touch $HOME/.config/dunst/dunstrc
+	sudo mkdir /etc/conky && sudo touch /etc/conky/conky.conf
+}
+function sleepy() {		# this function sleeps sys 1 sec
 	sleep 1
+}
+function updater() {		# this function updates repositories
+	sudo apt-get update
+}
+function i3_install() {		# this function installs vanilla i3 and i3lock-fancy
+	sudo apt-get install i3 i3lock-fancy -y
+}
+function wired_packs() {	# this function intalls the needed deps for wiredWM
+	sudo apt-get install nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky suckless-tools vim -y
 }
 # script begins here
 # update system first and install needed wiredWM packages.
 echo "Preparing your wiredWM install..."
 sleepy
 echo "Updating the repositories..."
-$UPDATER
+updater
 sleepy
 echo "Downloading needed packages for wiredWM..."
-$WIRED_PACKS
+wired_packs
 sleepy
 # install vanilla i3 and its components.
 echo "Downloading i3 and its components. Please be patient."
-$i3_INSTALL
+i3_install
 sleepy
-# change dirs to /wiredWM/scripts-config/configs and begin applying configs to needed places.
-cd ~/wiredWM/scripts-config/configs
+# make needed directories and files
+echo "Creating folders for config files..."
+makeFolders
+sleepy
 # apply the i3-config file to /etc/i3/config and ~/.config/i3/config
 echo "Copying wiredWM configuration files..."
 sleepy
@@ -91,7 +110,7 @@ echo "Vim configs copied. You can change it at ~/.vimrc."
 # set the default background image.
 # we are going to use wp/nExt.png.
 echo "Setting default wallpaper..." && sleepy 
-nitrogen --set-auto --save $DEF_WP_LOCATION
+feh --bg-scale $DEF_WP_LOCATION
 echo "Wallpaper saved. To change it, simply launch Nitrogen and choose whatever you would like." && sleepy 
 # all done 
 echo "wiredWM has been installed." && sleepy 
