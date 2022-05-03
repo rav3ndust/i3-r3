@@ -1,1 +1,13 @@
 set number
+set mouse=a
+set hlsearch
+set incsearch 
+set wrap
+filetype indent on
+syntax enable
+colorscheme slate
+highlight CursorLine ctermfg=DarkRed ctermbg=none
+highlight LineNr ctermfg=DarkMagenta ctermbg=none
+highlight Comment ctermfg=DarkRed
+highlight NonText ctermbg=Black
+highlight Search ctermbg=Black ctermfg=Red
