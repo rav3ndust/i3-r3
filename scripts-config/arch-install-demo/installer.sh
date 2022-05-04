@@ -13,7 +13,7 @@
 # - we use *nitrogen* for handling wallpaper selection and restoring with GUI.
 # - we use *feh* for handling wallpapers through CLI.
 # - we use *arandr* for graphical display management.
-# - we use *volumeicon-alsa* for a GUI-friendly way of volume management.
+# - we use *pasystray* for a GUI-friendly way of volume management.
 # - we use *kitty* and *stterm* for lightweight terminals.
 #	- note that stterm will be better for older machines.
 #	- users can set their favorite terminal in the i3 config file.
@@ -54,7 +54,7 @@ function i3_install() {		# this function installs vanilla i3 and i3lock-fancy
 	sudo pacman -S i3
 }
 function wired_packs() {	# this function intalls the needed deps for wiredWM
-	sudo pacman -S nitrogen arandr volumeicon flameshot kitty network-manager-applet conky vim 
+	sudo pacman -S nitrogen arandr pasystray volumeicon flameshot kitty network-manager-applet conky vim 
 }
 # script begins here
 # update system first and install needed wiredWM packages.
@@ -108,7 +108,7 @@ echo "Vim configs copied. You can change it at ~/.vimrc."
 # set the default background image.
 # we are going to use wp/nExt.png.
 echo "Setting default wallpaper..." && sleepy 
-feh --bg-scale $DEF_WP_LOCATION
+feh --bg-fill $DEF_WP_LOCATION
 echo "Wallpaper saved. To change it, simply launch Nitrogen and choose whatever you would like." && sleepy 
 # all done 
 echo "wiredWM has been installed." && sleepy 
