@@ -8,7 +8,7 @@ Things we need to build on top of Arch:
 - feh (TUI wallpaper management);
 - sddm (login manager);
 - flameshot (screenshot util); 
-- volumeicon (systray audio management); 
+- pasystray (systray audio management); 
 - dmenu (menu management); 
 - conky (displaying certain system info on desktop); ~
 - dunst (for displaying notifications); ~
@@ -28,6 +28,8 @@ Things we need to build on top of Arch:
 We also need to change the installation scripts to be Arch-centric. 
 
 Right now, they are more Debian/Ubuntu-centric.
+
+We switched to `pasystray` from `volumeicon` on Arch for systems using PipeWire - it tends to break `volumeicon`. 
 
 ## Update the installer!
 
