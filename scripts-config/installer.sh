@@ -22,6 +22,9 @@
 # - we use *vim* for text editing.
 # - *suckless-tools* is a collection of small software tools from the Suckless community.
 # - we use *lxpolkit* for user authentication when elevated system privs are needed. 
+# - we use *nnn* for terminal file management. 
+# - we use *cmus* for playing audio in the terminal. 
+# - we use *mpv* for handling multimedia files.
 ###############################
 i3_CONFIG_1_LOCATION="/etc/i3/config"
 i3_CONFIG_2_LOCATION="$HOME/.config/i3/config"
@@ -55,7 +58,7 @@ function i3_install() {		# this function installs vanilla i3 and i3lock-fancy
 	sudo apt-get install i3 i3lock-fancy -y
 }
 function wired_packs() {	# this function intalls the needed deps for wiredWM
-	sudo apt-get install nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky suckless-tools lxpolkit vim -y
+	sudo apt-get install nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus-y
 }
 # script begins here
 # update system first and install needed wiredWM packages.
