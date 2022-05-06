@@ -17,12 +17,12 @@
 # - we use *feh* for handling wallpapers through CLI.
 # - we use *arandr* for graphical display management.
 # - we use *polybar* for handling status bar.
-# - we use *kitty* and *stterm* for lightweight terminals.
-#	- note that stterm will be better for older machines.
+# - we use *kitty* and *alacritty* for lightweight terminals.
 #	- users can set their favorite terminal in the i3 config file.
 # - we have custom scripts built on top of surf browser called "nightsurf"
 # - we also have a custom conky, so we need the *conky* package.
-# - we use *vim* for text editing.
+# - we use *vim* for text editing in the terminal.
+# - we use *code* for GUI text editing.
 # - we use *rofi* for a simple run launcher.
 # - we use *picom* for handling display compositing.
 # - we use *nnn* as a terminal file browser.
@@ -43,7 +43,7 @@ VIM_CONFIG="$HOME/.vimrc"
 WIRED_VIM_CONFIG="$HOME/wiredWM/scripts-config/configs/vimrc" 
 POLYBAR_WIRED_CONFIG="$HOME/wiredWM/scripts-config/polybar-config/config.ini"
 POLYBAR_CONFIG_LOCATION="$HOME/.config/polybar/config.ini"
-DEF_WP_LOCATION="$HOME/wiredWM/wp/nExt.png"
+DEF_WP_LOCATION="$HOME/wiredWM/wp/lain2.jpg"
 CONFIGS="$HOME/wiredWM/scripts-config/configs"
 ################################
 function makeFolders() {
@@ -65,7 +65,7 @@ function i3_install() {		# this function installs vanilla i3
 	sudo pacman -S i3-wm
 }
 function wired_packs() {	# this function intalls the needed deps for wiredWM
-	sudo pacman -S git nitrogen arandr fish flameshot kitty network-manager-applet conky vim sddm nnn picom chromium nemo
+	sudo pacman -S git nitrogen arandr fish flameshot kitty feh code network-manager-applet conky vim sddm nnn picom chromium nemo
 }
 function enable_AUR() {		# builds yay for using the AUR
 	echo "Enabling the Arch User Repository (AUR)..."
@@ -90,8 +90,9 @@ function nightsurf_apply() {	# builds nightsurf
 	mkdir -p $HOME/nightsurf && touch $HOME/nightsurf/nightsurf.sh
 	echo "#!/bin/bash" >> $HOME/nightsurf/nightsurf.sh
 	echo "tabbed -u red -U purple -t black -T red surf -e" >> $HOME/nightsurf/nightsurf.sh
-	yay -S surf
-	yay -S tabbed
+	yay -S surf	# base surf
+	yay -S tabbed	# add tab support
+	chmod +x $HOME/nightsurf/nightsurf.sh	# make the file executable.
 	sudo cp $HOME/nightsurf/nightsurf.sh /usr/bin/nightsurf
 	echo "Nightsurf built. Invoke at any time by calling 'nightsurf'."
 }
@@ -145,7 +146,7 @@ echo "You can edit conky at /etc/conky/conky.conf anytime." && sleepy
 # apply the dunstrc to /etc/dunst/dunstrc and ~/config.dunst/dunstrc
 echo "Copying dunstrc..."
 sudo mkdir /etc/dunst && sudo touch /etc/dunst/dunstrc
-sudo mkdir ~/.config/dunst && sudo touch ~/config/dunst/dunstrc
+sudo mkdir ~/.config/dunst && sudo touch ~/.config/dunst/dunstrc
 sudo cp -f $WIRED_DUNSTRC $DUNSTRC_CONFIG_LOCATION_1
 sudo cp -f $WIRED_DUNSTRC $DUNSTRC_CONFIG_LOCATION_2
 echo "dunstrc copied." && sleepy
