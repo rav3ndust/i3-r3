@@ -83,7 +83,10 @@ bindsym $mod+d exec dmenu_run -nb black -nf purple -sb green -sf red -l 15 -p "n
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -nb black -nf purple -sb green -sf red -l 10 -p "nightshader - Applications List:"'
+#bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -nb black -nf purple -sb green -sf red -l 10 -p "nightshader - Applications List:"'
+
+# launch rofi - autorun, ssh, app picker.
+bindsym $mod+Shift+a exec --no-startup-id "rofi -combi -modi window,drun,ssh -theme purple -font 'hack 10' -show combi"
 
 # change focus
 bindsym $mod+j focus left
