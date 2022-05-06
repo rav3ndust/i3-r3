@@ -71,9 +71,9 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal. 
-# Our two installed terminal emulators are "kitty" and "stterm." Both are lightweight.
-bindsym $mod+Return exec kitty
-#bindsym $mod+Return exec st
+# Our two installed terminal emulators are "kitty" and "alacritty." Both are lightweight.
+#bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
