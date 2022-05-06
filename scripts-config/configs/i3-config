@@ -11,6 +11,10 @@
 
 set $mod Mod4
 
+# make windows float by default.  
+# comment/uncomment the below line to disable/enable tiling by default. 
+for_window [class="[.]*"] floating enable
+
 # for window title bars
 for_window [class="^.*"] border pixel
 # for border colors
@@ -34,7 +38,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # volumeicon provides us a simple, GUI way to control volume with mouse.
 # (volumeicon-alsa "ubuntu/mint/deb")
-exec --no-startup-id volumeicon
+# (volumeicon on arch.)
+# (if using pipewire, use pasystray.) 
+#exec --no-startup-id pasystray
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# polybar has built in volume controls. probably killing support for the above.
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -198,13 +206,16 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# replace i3bar with polybar. 
+exec --no-startup-id polybar
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
+#bar {
 	# uncomment the below if we want i3bar on top.
-	position top
-        status_command i3status 
-}
+	#position top
+#        status_command i3status 
+#}
 
 # bar {
 #	position top
