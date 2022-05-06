@@ -11,6 +11,7 @@
 ###############################
 # Some notes on the packages we need to download on installation: 
 # - we use *sddm* for login manager.
+# - we have *fish* as a secondary shell with highlighting and autocomplete.
 # - we use *flameshot* for taking screenshots.
 # - we use *nm-applet* for handling networks - i3 ships with this.
 # - we use *nitrogen* for handling wallpaper selection and restoring with GUI.
@@ -28,6 +29,7 @@
 # - we use *nnn* as a terminal file browser.
 # - we use *nemo* as a graphical file browser.
 # - we also include *chromium* and *nightsurf* for web browsing.
+# - we include *amfora* for browsing the Gemini network.
 ###############################
 i3_CONFIG_1_LOCATION="/etc/i3/config"
 i3_CONFIG_2_LOCATION="$HOME/.config/i3/config"
@@ -65,7 +67,7 @@ function i3_install() {		# this function installs vanilla i3
 	sudo pacman -S i3-wm
 }
 function wired_packs() {	# this function intalls the needed deps for wiredWM
-	sudo pacman -S git nitrogen arandr fish flameshot kitty feh code network-manager-applet conky vim sddm nnn picom chromium nemo
+	sudo pacman -S git nitrogen arandr fish flameshot alacritty amfora kitty feh code network-manager-applet conky vim sddm nnn picom chromium nemo
 }
 function enable_AUR() {		# builds yay for using the AUR
 	echo "Enabling the Arch User Repository (AUR)..."
