@@ -227,3 +227,7 @@ exec --no-startup-id polybar
 
 # custom conky displaying time, a message, and date in US format:
 exec --no-startup-id conky
+
+# we're using xautolock+i3lock to lock the screen after 10 mins of inactivity. The screen will turn purple and you'll be prompted for your password.
+# you can change the lock time by editing the number behind the -time flag. You can also edit the color of the lock screen using hexadecimal. Right now, it is set to purple (6a0dad)
+exec "xautolock -detectsleep -time 10 -locker \"i3 lock -c 6a0dad --show-failed-attempts\""
