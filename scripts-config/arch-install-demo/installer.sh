@@ -22,7 +22,7 @@
 #	- users can set their favorite terminal in the i3 config file.
 # - we have custom scripts built on top of surf browser called "nightsurf"
 # - we also have a custom conky, so we need the *conky* package.
-# - we use *vim* for text editing in the terminal.
+# - we use *vim* and *micro* for text editing in the terminal.
 # - we use *code* for GUI text editing.
 # - we use *rofi* for a simple run launcher.
 # - we use *picom* for handling display compositing.
@@ -67,7 +67,7 @@ function i3_install() {		# this function installs vanilla i3
 	sudo pacman -S i3-wm
 }
 function wired_packs() {	# this function intalls the needed deps for wiredWM
-	sudo pacman -S git nitrogen arandr fish flameshot alacritty amfora kitty feh code network-manager-applet conky vim sddm nnn picom chromium nemo
+	sudo pacman -S git nitrogen arandr fish flameshot alacritty micro amfora kitty feh code network-manager-applet conky vim sddm nnn picom chromium nemo
 }
 function enable_AUR() {		# builds yay for using the AUR
 	echo "Enabling the Arch User Repository (AUR)..."
