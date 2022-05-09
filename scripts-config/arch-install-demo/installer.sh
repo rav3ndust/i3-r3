@@ -92,8 +92,10 @@ function nightsurf_apply() {	# builds nightsurf
 	echo "Building nightsurf browser..."
 	mkdir -p $HOME/nightsurf && touch $HOME/nightsurf/nightsurf.sh
 	echo "#!/bin/bash" >> $HOME/nightsurf/nightsurf.sh
+	# clone our build of surf
+	cd ~/nightsurf && git clone https://github.com/rav3ndust/nightsurf
+	cd nightsurf && sudo make install
 	echo "tabbed -u red -U purple -t black -T red surf -e" >> $HOME/nightsurf/nightsurf.sh
-	yay -S surf	# base surf
 	yay -S tabbed	# add tab support
 	chmod +x $HOME/nightsurf/nightsurf.sh	# make the file executable.
 	sudo cp $HOME/nightsurf/nightsurf.sh /usr/bin/nightsurf
@@ -106,12 +108,18 @@ sleepy
 echo "Updating the repositories..."
 updater
 sleepy
+# download Yay AUR Helper and build it. 
+enable_AUR
+sleepy
+# install wiredWM repo and needed packages.
+# we also want to grab i3lock-fancy-git from AUR (for WM lockscreen)
 echo "Downloading needed packages for wiredWM..."
 wired_packs
 sleepy
-# download yay AUR helper and build it.
-enable_AUR
-sleepy
+echo "WiredWM packages installed." 
+echo "Downloading i3lock-fancy from AUR..."
+yay -S i3lock-fancy-git
+echo "Lockscreen downloaded. Moving on..."
 # install vanilla i3 and its components.
 echo "Downloading i3 and its components. Please be patient."
 i3_install
