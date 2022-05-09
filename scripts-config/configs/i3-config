@@ -11,8 +11,8 @@
 
 set $mod Mod4
 
-# make windows float by default.  
-# comment/uncomment the below line to disable/enable tiling by default. 
+# make windows float by default.
+# comment/uncomment the below line to disable/enable tiling by default.
 for_window [class="[.]*"] floating enable
 
 # for window title bars
@@ -39,7 +39,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # volumeicon provides us a simple, GUI way to control volume with mouse.
 # (volumeicon-alsa "ubuntu/mint/deb")
 # (volumeicon on arch.)
-# (if using pipewire, use pasystray.) 
+# (if using pipewire, use pasystray.)
 #exec --no-startup-id pasystray
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 # polybar has built in volume controls. probably killing support for the above.
@@ -48,16 +48,16 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# we currently use dunst to handle system notifications. 
-# make sure it starts on launch, because apps that rely on notifications might hang. 
-exec --no-startup-id dunst 
+# we currently use dunst to handle system notifications.
+# make sure it starts on launch, because apps that rely on notifications might hang.
+exec --no-startup-id dunst
 
-# we use nitrogen for wallpaper management. 
-# autostart nitrogen for the wallpaper. 
+# we use nitrogen for wallpaper management.
+# autostart nitrogen for the wallpaper.
 # we should make a command for a default wallpaper.
 exec --no-startup-id nitrogen --restore
 
-# we use Flameshot for easily taking screenshots from the panel. 
+# we use Flameshot for easily taking screenshots from the panel.
 exec --no-startup-id flameshot
 
 # Use pactl to adjust volume in PulseAudio.
@@ -70,7 +70,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal. 
+# start a terminal.
 # Our two installed terminal emulators are "kitty" and "alacritty." Both are lightweight.
 #bindsym $mod+Return exec kitty
 bindsym $mod+Return exec alacritty
@@ -209,7 +209,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# replace i3bar with polybar. 
+# replace i3bar with polybar.
 exec --no-startup-id polybar
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -217,7 +217,7 @@ exec --no-startup-id polybar
 #bar {
 	# uncomment the below if we want i3bar on top.
 	#position top
-#        status_command i3status 
+#        status_command i3status
 #}
 
 # bar {
@@ -231,3 +231,7 @@ exec --no-startup-id conky
 # we're using xautolock+i3lock to lock the screen after 10 mins of inactivity. The screen will turn purple and you'll be prompted for your password.
 # you can change the lock time by editing the number behind the -time flag. You can also edit the color of the lock screen using hexadecimal. Right now, it is set to purple (6a0dad)
 exec "xautolock -detectsleep -time 10 -locker \"i3 lock -c 6a0dad --show-failed-attempts\""
+
+# for policykit (getting sudo privs when needed by the system)
+# "polkit-dumb-agent" is available in the AUR.
+exec --no-startup-id polkit-dumb-agent
