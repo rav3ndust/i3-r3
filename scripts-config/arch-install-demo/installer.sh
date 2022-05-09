@@ -1,15 +1,15 @@
 #!/bin/bash
 # installer.sh -> for wiredWM
-# This is the installer script for wiredWM. 
+# This is the installer script for wiredWM.
 # Assumes an Arch Linux environment.
-# Important info for config files: 
+# Important info for config files:
 # - i3 config lives at /etc/i3/config and ~/.config/i3/config
 # - i3status config lives at /etc/i3status.conf
 # - dunst config (dunstrc) needs to live at /etc/dunst/dunstrc, and be copied to ~/.config/dunst/dunstrc
 # - conky.conf lives at /etc/conky/conky.conf
 # - polybar config lives at ~/.config/polybar/config.ini
 ###############################
-# Some notes on the packages we need to download on installation: 
+# Some notes on the packages we need to download on installation:
 # - we use *sddm* for login manager.
 # - we have *fish* as a secondary shell with highlighting and autocomplete.
 # - we use *flameshot* for taking screenshots.
@@ -30,7 +30,8 @@
 # - we use *nemo* as a graphical file browser.
 # - we also include *chromium* and *nightsurf* for web browsing.
 # - we include *amfora* for browsing the Gemini network.
-# - we have *xautolock* that runs *i3lock* after 10 mins of system inactivity. 
+# - we have *xautolock* that runs *i3lock* after 10 mins of system inactivity.
+# - we have *polkit-dumb-agent* for handling granting elevated user privs.
 ###############################
 i3_CONFIG_1_LOCATION="/etc/i3/config"
 i3_CONFIG_2_LOCATION="$HOME/.config/i3/config"
@@ -41,9 +42,9 @@ CONKY_CONFIG_LOCATION="/etc/conky/conky.conf"
 WIRED_CONKY_CONFIG="$HOME/wiredWM/scripts-config/configs/conky.conf"
 DUNSTRC_CONFIG_LOCATION_1="/etc/dunst/dunstrc"
 DUNSTRC_CONFIG_LOCATION_2="$HOME/.config/dunst/dunstrc"
-WIRED_DUNSTRC="$HOME/wiredWM/scripts-config/configs/dunstrc" 
+WIRED_DUNSTRC="$HOME/wiredWM/scripts-config/configs/dunstrc"
 VIM_CONFIG="$HOME/.vimrc"
-WIRED_VIM_CONFIG="$HOME/wiredWM/scripts-config/configs/vimrc" 
+WIRED_VIM_CONFIG="$HOME/wiredWM/scripts-config/configs/vimrc"
 POLYBAR_WIRED_CONFIG="$HOME/wiredWM/scripts-config/polybar-config/config.ini"
 POLYBAR_CONFIG_LOCATION="$HOME/.config/polybar/config.ini"
 DEF_WP_LOCATION="$HOME/wiredWM/wp/lain2.jpg"
@@ -64,7 +65,7 @@ function sleepy() {		# this function sleeps sys 1 sec
 function updater() {		# this function updates repositories
 	sudo pacman -Syu
 }
-function i3_install() {		# this function installs vanilla i3  
+function i3_install() {		# this function installs vanilla i3
 	sudo pacman -S i3-wm
 }
 function wired_packs() {	# this function intalls the needed deps for wiredWM
@@ -88,6 +89,11 @@ function polybar_rofi_inst() {	# builds polybar and rofi
 	yay -S rofi
 	echo "rofi finished."
 }
+function polkit-dumb-install() { # builds polkit-dumb-agent
+	echo "Installing polkit agent for superuser priveleges..."
+	yay -S polkit-dumb-agent
+	echo "Polkit agent installed."
+}
 function nightsurf_apply() {	# builds nightsurf
 	echo "Building nightsurf browser..."
 	mkdir -p $HOME/nightsurf && touch $HOME/nightsurf/nightsurf.sh
@@ -108,7 +114,7 @@ sleepy
 echo "Updating the repositories..."
 updater
 sleepy
-# download Yay AUR Helper and build it. 
+# download Yay AUR Helper and build it.
 enable_AUR
 sleepy
 # install wiredWM repo and needed packages.
@@ -116,7 +122,7 @@ sleepy
 echo "Downloading needed packages for wiredWM..."
 wired_packs
 sleepy
-echo "WiredWM packages installed." 
+echo "WiredWM packages installed."
 echo "Downloading i3lock-fancy from AUR..."
 yay -S i3lock-fancy-git
 echo "Lockscreen downloaded. Moving on..."
@@ -130,6 +136,9 @@ sleepy
 # build the nightsurf browser.
 nightsurf_apply
 sleepy
+# download polkit-dumb-agent from AUR for elevated privs when needed.
+polkit-dumb-install
+sleepy
 # make needed directories and files
 echo "Creating folders for config files..."
 makeFolders
@@ -140,7 +149,7 @@ sleepy
 echo "Copying i3-config..."
 sudo cp -f $WIRED_i3_CONFIG $i3_CONFIG_1_LOCATION
 sudo cp -f $WIRED_i3_CONFIG $i3_CONFIG_2_LOCATION
-echo "Done! If needed, you can edit your configuration files at ~/.config/i3/config anytime." 
+echo "Done! If needed, you can edit your configuration files at ~/.config/i3/config anytime."
 sleepy
 # apply the i3status-config file to /etc/i3status.conf
 echo "Copying i3status-config..."
@@ -153,7 +162,7 @@ echo "Copying conky.conf..."
 sudo cp -f $WIRED_CONKY_CONFIG $CONKY_CONFIG_LOCATION
 sleepy
 echo "conky.conf copied." && sleepy
-echo "You can edit conky at /etc/conky/conky.conf anytime." && sleepy 
+echo "You can edit conky at /etc/conky/conky.conf anytime." && sleepy
 # apply the dunstrc to /etc/dunst/dunstrc and ~/config.dunst/dunstrc
 echo "Copying dunstrc..."
 sudo mkdir /etc/dunst && sudo touch /etc/dunst/dunstrc
@@ -171,11 +180,11 @@ sudo cp -f $POLYBAR_WIRED_CONFIG $POLYBAR_CONFIG_LOCATION
 echo "Polybar config copied. Edit it anytime at ~/.config/polybar/config.ini."
 # set the default background image.
 # we are going to use wp/nExt.png.
-echo "Setting default wallpaper..." && sleepy 
+echo "Setting default wallpaper..." && sleepy
 feh --bg-scale $DEF_WP_LOCATION
-echo "Wallpaper saved. To change it, simply launch Nitrogen and choose whatever you would like." && sleepy 
-# all done 
-echo "wiredWM has been installed." && sleepy 
-echo "In order to log into it, please log out of your current X Session and log into 'i3', which you can now find in your desktop environment list in your login manager." && sleepy 
-notify-send "wiredWM installer" "wiredWM has been installed." 
-sleepy && exit 
+echo "Wallpaper saved. To change it, simply launch Nitrogen and choose whatever you would like." && sleepy
+# all done
+echo "wiredWM has been installed." && sleepy
+echo "In order to log into it, please log out of your current X Session and log into 'i3', which you can now find in your desktop environment list in your login manager." && sleepy
+notify-send "wiredWM installer" "wiredWM has been installed."
+sleepy && exit
