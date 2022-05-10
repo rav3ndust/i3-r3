@@ -1,4 +1,9 @@
 #!/bin/bash
+# nightshade Auto Installer
+###########################################################################################################################
+# Applies wiredWM, custom configs, scripts and more to a vanilla Arch install. 						  #
+# Running this will give you a complete, functioning Arch setup with the "nightshade customizations" automatically.       #
+###########################################################################################################################
 # installer.sh -> for wiredWM
 # This is the installer script for wiredWM.
 # Assumes an Arch Linux environment.
