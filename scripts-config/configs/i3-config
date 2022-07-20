@@ -18,7 +18,8 @@ for_window [class="[.]*"] floating enable
 # for window title bars
 for_window [class="^.*"] border pixel
 # for border colors
-client.focused #555555 #555555 #ffffff #2e9ef4     #CC0000
+# the final hex code is window border. currently = Neon Pink (#FF10F0)
+client.focused #555555 #555555 #ffffff #2e9ef4    #FF10F0 
 
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -40,7 +41,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # (volumeicon-alsa "ubuntu/mint/deb")
 # (volumeicon on arch.)
 # (if using pipewire, use pasystray.)
-#exec --no-startup-id pasystray
+exec --no-startup-id pasystray
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 # polybar has built in volume controls. probably killing support for the above.
 
@@ -72,8 +73,8 @@ floating_modifier $mod
 
 # start a terminal.
 # Our two installed terminal emulators are "kitty" and "alacritty." Both are lightweight.
-#bindsym $mod+Return exec kitty
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
+#bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -86,7 +87,7 @@ bindsym $mod+d exec dmenu_run -nb black -nf purple -sb green -sf red -l 15 -p "n
 #bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -nb black -nf purple -sb green -sf red -l 10 -p "nightshader - Applications List:"'
 
 # launch rofi - autorun, ssh, app picker.
-bindsym $mod+Shift+a exec --no-startup-id "rofi -combi -modi window,drun,ssh -theme purple -font 'hack 10' -show combi"
+#bindsym $mod+Shift+a exec --no-startup-id "rofi -combi -modi window,drun,ssh -theme purple -font 'hack 10' -show combi"
 
 # change focus
 bindsym $mod+j focus left
@@ -210,15 +211,15 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # replace i3bar with polybar.
-exec --no-startup-id polybar
+# exec --no-startup-id polybar
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-#bar {
+bar {
 	# uncomment the below if we want i3bar on top.
-	#position top
-#        status_command i3status
-#}
+	position top
+    	status_command i3status
+}
 
 # bar {
 #	position top
@@ -231,7 +232,5 @@ exec --no-startup-id conky
 # we're using xautolock+i3lock to lock the screen after 10 mins of inactivity. The screen will turn purple and you'll be prompted for your password.
 # you can change the lock time by editing the number behind the -time flag. You can also edit the color of the lock screen using hexadecimal. Right now, it is set to purple (6a0dad)
 exec "xautolock -detectsleep -time 10 -locker \"i3 lock -c 6a0dad --show-failed-attempts\""
-
-# for policykit (getting sudo privs when needed by the system)
-# "polkit-dumb-agent" is available in the AUR.
-exec --no-startup-id polkit-dumb-agent
+# We're using xscreensaver to handle screensaving and autolock.
+exec --no-startup-id xscreensaver
