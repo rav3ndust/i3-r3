@@ -25,6 +25,7 @@
 # - we use *nnn* for terminal file management. 
 # - we use *cmus* for playing audio in the terminal. 
 # - we use *mpv* for handling multimedia files.
+# - we use *xscreensaver* for handling screensaver functionality and auto-locking.
 ###############################
 i3_CONFIG_1_LOCATION="/etc/i3/config"
 i3_CONFIG_2_LOCATION="$HOME/.config/i3/config"
@@ -58,7 +59,7 @@ function i3_install() {		# this function installs vanilla i3 and i3lock-fancy
 	sudo apt-get install i3 i3lock-fancy -y
 }
 function wired_packs() {	# this function intalls the needed deps for wiredWM
-	sudo apt-get install nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus-y
+	sudo apt-get install nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver -y
 }
 # script begins here
 # update system first and install needed wiredWM packages.
