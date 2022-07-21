@@ -59,7 +59,7 @@ function i3_install() {		# this function installs vanilla i3 and i3lock-fancy
 	sudo apt-get install i3 i3lock-fancy -y
 }
 function wired_packs() {	# this function intalls the needed deps for wiredWM
-	sudo apt-get install nitrogen arandr volumeicon-alsa flameshot kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver -y
+	sudo apt-get install nitrogen arandr volumeicon-alsa flameshot pasystray kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver -y
 }
 # script begins here
 # update system first and install needed wiredWM packages.
