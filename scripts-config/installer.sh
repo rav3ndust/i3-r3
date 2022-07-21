@@ -61,6 +61,22 @@ function i3_install() {		# this function installs vanilla i3 and i3lock-fancy
 function wired_packs() {	# this function intalls the needed deps for wiredWM
 	sudo apt-get install nitrogen arandr volumeicon-alsa flameshot pasystray kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver -y
 }
+function build_polybar() {	# this function builds and installs polybar
+	polypkgs="sudo apt install build-essential git cmake cmake-data pkg-config libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev python3-sphinx libuv1-dev"
+	polylink="https://github.com/polybar/polybar/releases/download/3.6.3/polybar-3.6.3.tar.gz"
+	echo "Installing dependencies for polybar..."
+	sudo apt-get install $polypkgs -y
+	echo "Downloading polybar source code..."
+	wget $polylink
+	echo "Source downloaded. Building polybar..."
+	tar -xvf polybar-3.6.3.tar.gz
+	cd polybar
+	mkdir build && cd build
+	cmake ..
+	make -j$(nproc)
+	sudo make install
+	echo "Polybar built and installed onto the system." 
+}
 # script begins here
 # update system first and install needed wiredWM packages.
 echo "Preparing your wiredWM install..."
