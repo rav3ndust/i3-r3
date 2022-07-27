@@ -20,17 +20,18 @@
     follow = none
 
     ### Geometry ###
-
+    # Current option sets the notification window at the top right.
+    geometry = "0x5-30+25"
     # dynamic width from 0 to 300
-    # width = (0, 300)
+    #width = (0, 300)
     # constant width of 300
-    width = 300
+    #width = 300
 
     # The maximum height of a single notification, excluding the frame.
-    height = 300
+    #height = 300
 
     # Position the notification in the top right corner
-    origin = top-right
+    origin = top-right 
 
     # Offset from the origin
     offset = 15x49
@@ -68,7 +69,7 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 65
+    transparency = 0 
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
@@ -98,7 +99,7 @@
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
     separator_color = frame
-
+    shrink = yes
     # Sort messages by urgency.
     sort = no
 
@@ -111,7 +112,7 @@
 
     ### Text ###
 
-    font = Monospace
+    font = Ubuntu 
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
