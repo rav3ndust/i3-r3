@@ -41,7 +41,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # (volumeicon-alsa "ubuntu/mint/deb")
 # (volumeicon on arch.)
 # (if using pipewire, use pasystray.)
-exec --no-startup-id pasystray
+exec --no-startup-id volumeicon
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 # polybar has built in volume controls. probably killing support for the above.
 
@@ -73,8 +73,8 @@ floating_modifier $mod
 
 # start a terminal.
 # Our two installed terminal emulators are "kitty" and "alacritty." Both are lightweight.
-bindsym $mod+Return exec kitty
-#bindsym $mod+Return exec alacritty
+#bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -87,7 +87,7 @@ bindsym $mod+d exec dmenu_run -nb black -nf purple -sb green -sf red -l 15 -p "n
 #bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -nb black -nf purple -sb green -sf red -l 10 -p "nightshader - Applications List:"'
 
 # launch rofi - autorun, ssh, app picker.
-#bindsym $mod+Shift+a exec --no-startup-id "rofi -combi -modi window,drun,ssh -theme purple -font 'hack 10' -show combi"
+bindsym $mod+Shift+a exec --no-startup-id "rofi -combi -modi window,drun,ssh -theme purple -font 'hack 10' -show combi"
 
 # change focus
 bindsym $mod+j focus left
