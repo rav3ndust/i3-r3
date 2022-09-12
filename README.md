@@ -22,6 +22,7 @@ Easy to use and easily extensible. Takes up very little of precious system resou
 - Screenshot utility (handles via `flameshot`.)
 - Network/Wi-Fi manager (handles via `nm-applet`.)
 - Volume Control (handles via `volumeicon`) 
+
 =====
 
 ## more resources for your stuff
