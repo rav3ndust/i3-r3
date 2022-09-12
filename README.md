@@ -12,7 +12,7 @@
 
 ## minimal and lightweight 
 
-![image](https://user-images.githubusercontent.com/35274771/167079883-f9c21dd4-1961-4246-8adf-3191f085ff5a.png) 
+![image](https://user-images.githubusercontent.com/35274771/189591225-95261511-a82a-4586-9af0-bf4250f1f8cd.png)
 ###### minimal desktop and keyboard-driven for quick efficiency. clickable icons are located at the right side of the status bar for common tasks - for those unfortunate occasions where you have to reach for the mouse
 
 Easy to use and easily extensible. Takes up very little of precious system resources, and gives you a minimal but efficient keyboard-driven environment, so you can focus less on messing around with bells and whistles found on prominent desktop environments and focus more on the task at hand. It *is* a tiling window manager, and these sorts of WMs are well-loved for how efficient and extensible they can be. 
