@@ -5,7 +5,7 @@
 
 **wiredWM** is rav3ndust's personal fork of i3, which is a tiling window manager for X11.
 
-![image](https://user-images.githubusercontent.com/35274771/167078996-eaa7cb82-3acc-46cd-a716-c39251f300da.png)
+![image](https://user-images.githubusercontent.com/35274771/189590159-013dd4b7-bb3a-4894-8cc7-d5ce00cb56ba.png)
 ###### let's all love lain
 
 =====
@@ -21,13 +21,12 @@ Easy to use and easily extensible. Takes up very little of precious system resou
 
 - Screenshot utility (handles via `flameshot`.)
 - Network/Wi-Fi manager (handles via `nm-applet`.)
-
+- Volume Control (handles via `volumeicon`) 
 =====
 
 ## more resources for your stuff
 
-![image](https://user-images.githubusercontent.com/35274771/167080306-113ca59d-23ea-4f0e-9a10-d6f58a1b56e3.png)
-###### browse the web and run all of your favorite applications in a minimal environment 
+![image](https://user-images.githubusercontent.com/35274771/189590616-299a60d1-7add-4bde-805a-891a2c4e0ddd.png)###### browse the web and run all of your favorite applications in a minimal environment 
 
 Just open up the **nightshade launcher** by pressing *crtl+d* - that launches a custom **dmenu** script, and you can search for and launch your applications with ease. Think of it as your miniature Start panel.
 
@@ -37,7 +36,7 @@ For a general list of applications, you can also press *ctrl+Shift+a* and scroll
 
 ## organize your windows with ease
 
-![image](https://user-images.githubusercontent.com/35274771/167082527-5db8b53d-5e10-4c60-93a7-ccbff07b3071.png)
+![image](https://user-images.githubusercontent.com/35274771/189590507-5ea54571-21a8-4a4a-956f-b50a589c2303.png)
 ###### automate the organization of the windows on your screen
 
 A bunch of floating windows can become difficult to manage in the middle of a workflow - which is another reason a tiling window manager can really come in handy. Being built on top of the much-loved **i3**, **wiredWM** allows you to easily tile or float your windows with a quick keyboard shortcut. 
