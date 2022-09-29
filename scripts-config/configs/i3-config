@@ -13,7 +13,7 @@ set $mod Mod4
 
 # make windows float by default.
 # comment/uncomment the below line to disable/enable tiling by default.
-for_window [class="[.]*"] floating enable
+#for_window [class="[.]*"] floating enable
 
 # for window title bars
 for_window [class="^.*"] border pixel
@@ -73,8 +73,8 @@ floating_modifier $mod
 
 # start a terminal.
 # Our two installed terminal emulators are "kitty" and "alacritty." Both are lightweight.
-#bindsym $mod+Return exec kitty
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
+#bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
