@@ -59,7 +59,7 @@ function i3_install() {		# this function installs vanilla i3 and i3lock-fancy
 	sudo apt-get install i3 i3lock-fancy -y
 }
 function wired_packs() {	# this function intalls the needed deps for wiredWM
-	sudo apt-get install nitrogen arandr volumeicon-alsa flameshot pasystray kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver -y
+	sudo apt-get install nitrogen arandr feh volumeicon-alsa flameshot pasystray kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver -y
 }
 function build_polybar() {	# this function builds and installs polybar
 	polypkgs="sudo apt install build-essential git cmake cmake-data pkg-config libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev python3-sphinx libuv1-dev"
