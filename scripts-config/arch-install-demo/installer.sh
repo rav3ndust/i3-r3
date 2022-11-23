@@ -71,10 +71,10 @@ function updater() {		# this function updates repositories
 	sudo pacman -Sy
 }
 function i3_install() {		# this function installs vanilla i3
-	sudo pacman -S i3-wm
+	sudo pacman -S i3-wm i3status
 }
 function wired_packs() {	# this function intalls the needed deps for wiredWM
-	sudo pacman -S git nitrogen arandr fish xorg-xkill xautolock flameshot alacritty micro dunst amfora kitty feh code network-manager-applet conky vim sddm nnn picom chromium nemo volumeicon
+	sudo pacman -S git nitrogen lxsession arandr xscreensaver fish xorg-xkill xautolock flameshot alacritty micro dunst amfora kitty feh code network-manager-applet conky vim sddm nnn picom chromium nemo volumeicon
 }
 function enable_AUR() {		# builds yay for using the AUR
 	echo "Enabling the Arch User Repository (AUR)..."
