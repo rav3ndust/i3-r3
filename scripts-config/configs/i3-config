@@ -61,6 +61,9 @@ exec --no-startup-id nitrogen --restore
 # we use Flameshot for easily taking screenshots from the panel.
 exec --no-startup-id flameshot
 
+# we use lxpolkit to handle priv escalation when needed.
+exec --no-startup-id lxpolkit
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
