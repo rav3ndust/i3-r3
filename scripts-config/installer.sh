@@ -26,6 +26,7 @@
 # - we use *cmus* for playing audio in the terminal. 
 # - we use *mpv* for handling multimedia files.
 # - we use *xscreensaver* for handling screensaver functionality and auto-locking.
+# - we use *xss-lock* for an additional screen locking utility to run i3lock-fancy.
 ###############################
 i3_CONFIG_1_LOCATION="/etc/i3/config"
 i3_CONFIG_2_LOCATION="$HOME/.config/i3/config"
@@ -49,9 +50,6 @@ function makeFolders() {
 	sudo mkdir $HOME/.config/dunst && sudo touch $HOME/.config/dunst/dunstrc
 	sudo mkdir /etc/conky && sudo touch /etc/conky/conky.conf
 }
-function sleepy() {		# this function sleeps sys 1 sec
-	sleep 1
-}
 function updater() {		# this function updates repositories
 	sudo apt-get update
 }
@@ -59,62 +57,46 @@ function i3_install() {		# this function installs vanilla i3 and i3lock-fancy
 	sudo apt-get install i3 i3lock-fancy -y
 }
 function wired_packs() {	# this function intalls the needed deps for wiredWM
-	sudo apt-get install nitrogen xterm arandr feh volumeicon-alsa flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver -y
-}
-function build_polybar() {	# this function builds and installs polybar
-	polypkgs="sudo apt install build-essential git cmake cmake-data pkg-config libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev python3-sphinx libuv1-dev"
-	polylink="https://github.com/polybar/polybar/releases/download/3.6.3/polybar-3.6.3.tar.gz"
-	echo "Installing dependencies for polybar..."
-	sudo apt-get install $polypkgs -y
-	echo "Downloading polybar source code..."
-	wget $polylink
-	echo "Source downloaded. Building polybar..."
-	tar -xvf polybar-3.6.3.tar.gz
-	cd polybar
-	mkdir build && cd build
-	cmake ..
-	make -j$(nproc)
-	sudo make install
-	echo "Polybar built and installed onto the system." 
+	sudo apt-get install nitrogen xterm arandr xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver -y
 }
 # script begins here
 # update system first and install needed wiredWM packages.
 echo "Preparing your wiredWM install..."
-sleepy
+sleep 1
 echo "Updating the repositories..."
 updater
-sleepy
+sleep 1
 echo "Downloading needed packages for wiredWM..."
 wired_packs
-sleepy
+sleep 1
 # install vanilla i3 and its components.
 echo "Downloading i3 and its components. Please be patient."
 i3_install
-sleepy
+sleep 1
 # make needed directories and files
 echo "Creating folders for config files..."
 makeFolders
-sleepy
+sleep 1
 # apply the i3-config file to /etc/i3/config and ~/.config/i3/config
 echo "Copying wiredWM configuration files..."
-sleepy
+sleep 1
 echo "Copying i3-config..."
 sudo cp -f $WIRED_i3_CONFIG $i3_CONFIG_1_LOCATION
 sudo cp -f $WIRED_i3_CONFIG $i3_CONFIG_2_LOCATION
 echo "Done! If needed, you can edit your configuration files at ~/.config/i3/config anytime." 
-sleepy
+sleep 1
 # apply the i3status-config file to /etc/i3status.conf
 echo "Copying i3status-config..."
 sudo cp -f $WIRED_i3STATUS_CONFIG $i3STATUS_LOCATION
-sleepy
-echo "i3status-config copied." && sleepy
-echo "You can edit it anytime at /etc/i3status.conf" && sleepy
+sleep 1
+echo "i3status-config copied." && sleep 1
+echo "You can edit it anytime at /etc/i3status.conf" && sleep 1
 # apply the conky config to /etc/conky/conky.conf
 echo "Copying conky.conf..."
 sudo cp -f $WIRED_CONKY_CONFIG $CONKY_CONFIG_LOCATION
-sleepy
-echo "conky.conf copied." && sleepy
-echo "You can edit conky at /etc/conky/conky.conf anytime." && sleepy 
+sleep 1
+echo "conky.conf copied." && sleep 1
+echo "You can edit conky at /etc/conky/conky.conf anytime." && sleep 1
 # apply the dunstrc to /etc/dunst/dunstrc and ~/config.dunst/dunstrc
 echo "Copying dunstrc..."
 sudo mkdir /etc/dunst && sudo touch /etc/dunst/dunstrc
@@ -128,11 +110,11 @@ sudo cp -f $WIRED_VIM_CONFIG $VIM_CONFIG
 echo "Vim configs copied. You can change it at ~/.vimrc."
 # set the default background image.
 # we are going to use wp/nExt.png.
-echo "Setting default wallpaper..." && sleepy 
+echo "Setting default wallpaper..." && sleep 1
 feh --bg-scale $DEF_WP_LOCATION
-echo "Wallpaper saved. To change it, simply launch Nitrogen and choose whatever you would like." && sleepy 
+echo "Wallpaper saved. To change it, simply launch Nitrogen and choose whatever you would like." && sleep 1 
 # all done 
-echo "wiredWM has been installed." && sleepy 
-echo "In order to log into it, please log out of your current X Session and log into 'i3', which you can now find in your desktop environment list in your login manager." && sleepy 
+echo "wiredWM has been installed." && sleep 1
+echo "In order to log into it, please log out of your current X Session and log into 'i3', which you can now find in your desktop environment list in your login manager." && sleep 1
 notify-send "wiredWM installer" "wiredWM has been installed." 
-sleepy && exit 
+sleep 1 && exit 
