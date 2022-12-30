@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 # installer.sh -> for wiredWM
 # This is the installer script for wiredWM. 
 # Important info for config files: 
