@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+#set -euo pipefail
 # installer.sh -> for wiredWM
 # This is the installer script for wiredWM. 
 # Important info for config files: 
@@ -41,7 +41,7 @@ DUNSTRC_CONFIG_LOCATION_2="$HOME/.config/dunst/dunstrc"
 WIRED_DUNSTRC="$HOME/wiredWM/scripts-config/configs/dunstrc" 
 VIM_CONFIG="$HOME/.vimrc"
 WIRED_VIM_CONFIG="vimrc" 
-DEF_WP_LOCATION="$HOME/wiredWM/wp/nExt.png"
+DEF_WP_LOCATION="$HOME/wiredWM/wp/lain3wp.jpg"
 ################################
 function makeFolders() {
 	sudo mkdir /etc/i3 && sudo touch /etc/i3/config
@@ -112,7 +112,7 @@ echo "Vim configs copied. You can change it at ~/.vimrc."
 # set the default background image.
 # we are going to use wp/nExt.png.
 echo "Setting default wallpaper..." && sleep 1
-feh --bg-scale $DEF_WP_LOCATION
+nitrogen set-scaled $DEF_WP_LOCATION
 echo "Wallpaper saved. To change it, simply launch Nitrogen and choose whatever you would like." && sleep 1 
 # all done 
 echo "wiredWM has been installed." && sleep 1
