@@ -105,7 +105,7 @@ echo "Copying vim configs..."
 sudo cp -f $WIRED_VIM_CONFIG $VIM_CONFIG
 echo "Vim configs copied. You can change it at ~/.vimrc."
 # set the default background image.
-# we are going to use wp/nExt.png.
+# we are going to use wp/lainwp3.png.
 echo "Setting default wallpaper..." && sleep 1
 nitrogen --set-scaled $DEF_WP_LOCATION
 echo "Wallpaper saved. To change it, simply launch Nitrogen and choose whatever you would like." && sleep 1 
