@@ -90,7 +90,7 @@ apply_configs () {
 	sleep 1
 	echo "conky.conf copied." && sleep 1
 	echo "You can edit conky at /etc/conky/conky.conf anytime." && sleep 1
-	# apply the dunstrc to /etc/dunst/dunstrc and ~/config.dunst/dunstrc
+	# apply the dunstrc to /etc/dunst/dunstrc and ~/.config/dunst/dunstrc
 	echo "Copying dunstrc..."
 	sudo mkdir /etc/dunst && sudo touch /etc/dunst/dunstrc
 	sudo mkdir ~/.config/dunst && sudo touch ~/.config/dunst/dunstrc
