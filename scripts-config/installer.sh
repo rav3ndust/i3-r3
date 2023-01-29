@@ -46,7 +46,7 @@ DEF_WP_LOCATION="$HOME/wiredWM/wp/lain3wp.jpg"
 ########################################################
 # - - - Functions - - - 
 ########################################################
-makeFolders() {
+makeFolders () {
 	# this function handles wm config
 	echo "Creating folders for config files..."
 	sleep 1
@@ -57,12 +57,12 @@ makeFolders() {
 	sudo mkdir $HOME/.config/dunst && sudo touch $HOME/.config/dunst/dunstrc
 	sudo mkdir /etc/conky && sudo touch /etc/conky/conky.conf
 }
-install_wired_pkgs() {	
+install_wired_pkgs () {	
 	# this function updates and intalls the needed deps for wiredWM
 	sudo apt-get update
 	sudo apt-get install i3 i3lock-fancy nitrogen xterm arandr rofi xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver amfora -y
 }
-apply_configs() {
+apply_configs () {
 	# this function applies the configs for: 
 	#	- i3
 	#	- i3status
@@ -104,7 +104,7 @@ apply_configs() {
 	echo "Vim configs copied. You can change it at ~/.vimrc."
 	sleep 1
 }
-wp_set() {
+wp_set () {
 	# this function uses nitrogen to set the default wallpaper.
 	# we are going to use wp/lainwp3.png.
 	echo "Setting default wallpaper..." && sleep 1
@@ -112,7 +112,7 @@ wp_set() {
 	echo "Wallpaper saved. To change it, simply launch Nitrogen and choose whatever you would like." 
 	sleep 1 
 }
-main() {
+main () {
 	# 'main' function
 	# update system and install needed wiredWM packages.
 	echo "Updating repositories and preparing for installation..."
@@ -121,7 +121,7 @@ main() {
 	makeFolders	
 	apply_configs
 	wp_set
-	########################################################
+	# x x x x x x x x x x x x x x x x x x 
 	# - - - finish up
 	echo "wiredWM has been installed." && sleep 1
 	echo "In order to log into it, please log out of your current X Session and log into 'i3', which you can now find in your desktop environment list in your login manager." && sleep 1
@@ -132,3 +132,4 @@ main() {
 # Script Entry Point
 ########################################################
 main
+# TODO more testing on a few new installations.
