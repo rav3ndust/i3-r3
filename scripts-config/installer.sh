@@ -118,10 +118,10 @@ main () {
 	# update system and install needed wiredWM packages.
 	echo "Updating repositories and preparing for installation..."
 	sleep 1
-	install_wired_pkgs		# install required pkgs
-	makeFolders				# make required folders
-	apply_configs			# apply custom configs
-	wp_set					# set wallpaper
+	install_wired_pkgs		
+	makeFolders				
+	apply_configs			
+	wp_set					
 	# x x x x x x x x x x x x x x x x x x 
 	# - - - finish up
 	echo "wiredWM has been installed." && sleep 1
