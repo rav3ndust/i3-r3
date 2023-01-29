@@ -95,7 +95,7 @@ apply_configs () {
 	# apply the dunstrc to /etc/dunst/dunstrc and ~/config.dunst/dunstrc
 	echo "Copying dunstrc..."
 	sudo mkdir /etc/dunst && sudo touch /etc/dunst/dunstrc
-	sudo mkdir ~/.config/dunst && sudo touch ~/config/dunst/dunstrc
+	sudo mkdir ~/.config/dunst && sudo touch ~/.config/dunst/dunstrc
 	sudo cp -f $WIRED_DUNSTRC $DUNSTRC_CONFIG_LOCATION_1
 	sudo cp -f $WIRED_DUNSTRC $DUNSTRC_CONFIG_LOCATION_2
 	echo "dunstrc copied." && sleepy
