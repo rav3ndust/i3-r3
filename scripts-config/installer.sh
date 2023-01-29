@@ -54,25 +54,18 @@ function makeFolders() {
 function updater() {		# this function updates repositories
 	sudo apt-get update
 }
-function i3_install() {		# this function installs vanilla i3 and i3lock-fancy
-	sudo apt-get install i3 i3lock-fancy -y
-}
-function wired_packs() {	# this function intalls the needed deps for wiredWM
-	sudo apt-get install nitrogen xterm arandr rofi xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver amfora -y
+function install_wired_pkgs() {	# this function intalls the needed deps for wiredWM
+	sudo apt-get install i3 i3lock-fancy nitrogen xterm arandr rofi xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver amfora -y
 }
 # script begins here
-# update system first and install needed wiredWM packages.
+# update system and install needed wiredWM packages.
 echo "Preparing your wiredWM install..."
 sleep 1
 echo "Updating the repositories..."
 updater
 sleep 1
 echo "Downloading needed packages for wiredWM..."
-wired_packs
-sleep 1
-# install vanilla i3 and its components.
-echo "Downloading i3 and its components. Please be patient."
-i3_install
+install_wired_pkgs
 sleep 1
 # make needed directories and files
 echo "Creating folders for config files..."
