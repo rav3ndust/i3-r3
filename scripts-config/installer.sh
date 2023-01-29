@@ -96,7 +96,7 @@ apply_configs () {
 	sudo mkdir ~/.config/dunst && sudo touch ~/.config/dunst/dunstrc
 	sudo cp -f $WIRED_DUNSTRC $DUNSTRC_CONFIG_LOCATION_1
 	sudo cp -f $WIRED_DUNSTRC $DUNSTRC_CONFIG_LOCATION_2
-	echo "dunstrc copied." && sleepy
+	echo "dunstrc copied." && sleep 1
 	# apply the vimrc to ~/.vimrc
 	echo "Copying vim configs..."
 	sudo cp -f $WIRED_VIM_CONFIG $VIM_CONFIG
