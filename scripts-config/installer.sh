@@ -43,7 +43,10 @@ VIM_CONFIG="$HOME/.vimrc"
 WIRED_VIM_CONFIG="vimrc" 
 DEF_WP_LOCATION="$HOME/wiredWM/wp/lain3wp.jpg"
 ################################
-function makeFolders() {
+# - - - Functions - - - 
+################################
+makeFolders() {
+	# this function handles wm config
 	sudo mkdir /etc/i3 && sudo touch /etc/i3/config
 	sudo mkdir $HOME/.config/i3 && sudo touch $HOME/.config/i3/config
 	sudo touch /etc/i3status.conf
@@ -51,10 +54,9 @@ function makeFolders() {
 	sudo mkdir $HOME/.config/dunst && sudo touch $HOME/.config/dunst/dunstrc
 	sudo mkdir /etc/conky && sudo touch /etc/conky/conky.conf
 }
-function updater() {		# this function updates repositories
+install_wired_pkgs() {	
+	# this function updates and intalls the needed deps for wiredWM
 	sudo apt-get update
-}
-function install_wired_pkgs() {	# this function intalls the needed deps for wiredWM
 	sudo apt-get install i3 i3lock-fancy nitrogen xterm arandr rofi xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver amfora -y
 }
 # script begins here
