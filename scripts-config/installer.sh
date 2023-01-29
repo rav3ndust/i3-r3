@@ -69,9 +69,7 @@ apply_configs () {
 	#	- i3status
 	#	- conky
 	#	- dunst
-	#	- rofi
 	#	- vim
-	#	- and other relevant ones
 	# apply the i3-config file to /etc/i3/config and ~/.config/i3/config
 	echo "Copying wiredWM configuration files..."
 	sleep 1
