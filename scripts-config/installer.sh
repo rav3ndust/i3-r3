@@ -1,5 +1,6 @@
 #!/bin/bash
 #set -euo pipefail
+########################################################
 # installer.sh -> for wiredWM
 # This is the installer script for wiredWM. 
 # Important info for config files: 
@@ -7,7 +8,7 @@
 # - i3status config lives at /etc/i3status.conf
 # - dunst config (dunstrc) needs to live at /etc/dunst/dunstrc, and be copied to ~/.config/dunst/dunstrc
 # - conky.conf lives at /etc/conky/conky.conf
-###############################
+########################################################
 # Some notes on the packages we need to download on installation: 
 # - we use *flameshot* for taking screenshots.
 # - we use *nm-applet* for handling networks - i3 ships with this.
@@ -28,7 +29,7 @@
 # - we use *mpv* for handling multimedia files.
 # - we use *xscreensaver* for handling screensaver functionality and auto-locking.
 # - we use *xss-lock* for an additional screen locking utility to run i3lock-fancy.
-###############################
+########################################################
 i3_CONFIG_1_LOCATION="/etc/i3/config"
 i3_CONFIG_2_LOCATION="$HOME/.config/i3/config"
 WIRED_i3_CONFIG="$HOME/wiredWM/scripts-config/configs/i3-config"
@@ -42,11 +43,13 @@ WIRED_DUNSTRC="$HOME/wiredWM/scripts-config/configs/dunstrc"
 VIM_CONFIG="$HOME/.vimrc"
 WIRED_VIM_CONFIG="$HOME/wiredWM/scripts-config/configs/vimrc" 
 DEF_WP_LOCATION="$HOME/wiredWM/wp/lain3wp.jpg"
-################################
+########################################################
 # - - - Functions - - - 
-################################
+########################################################
 makeFolders() {
 	# this function handles wm config
+	echo "Creating folders for config files..."
+	sleep 1
 	sudo mkdir /etc/i3 && sudo touch /etc/i3/config
 	sudo mkdir $HOME/.config/i3 && sudo touch $HOME/.config/i3/config
 	sudo touch /etc/i3status.conf
@@ -59,58 +62,73 @@ install_wired_pkgs() {
 	sudo apt-get update
 	sudo apt-get install i3 i3lock-fancy nitrogen xterm arandr rofi xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver amfora -y
 }
-# script begins here
-# update system and install needed wiredWM packages.
-echo "Preparing your wiredWM install..."
-sleep 1
-echo "Updating the repositories..."
-updater
-sleep 1
-echo "Downloading needed packages for wiredWM..."
-install_wired_pkgs
-sleep 1
-# make needed directories and files
-echo "Creating folders for config files..."
-makeFolders
-sleep 1
-# apply the i3-config file to /etc/i3/config and ~/.config/i3/config
-echo "Copying wiredWM configuration files..."
-sleep 1
-echo "Copying i3-config..."
-sudo cp -f $WIRED_i3_CONFIG $i3_CONFIG_1_LOCATION
-sudo cp -f $WIRED_i3_CONFIG $i3_CONFIG_2_LOCATION
-echo "Done! If needed, you can edit your configuration files at ~/.config/i3/config anytime." 
-sleep 1
-# apply the i3status-config file to /etc/i3status.conf
-echo "Copying i3status-config..."
-sudo cp -f $WIRED_i3STATUS_CONFIG $i3STATUS_LOCATION
-sleep 1
-echo "i3status-config copied." && sleep 1
-echo "You can edit it anytime at /etc/i3status.conf" && sleep 1
-# apply the conky config to /etc/conky/conky.conf
-echo "Copying conky.conf..."
-sudo cp -f $WIRED_CONKY_CONFIG $CONKY_CONFIG_LOCATION
-sleep 1
-echo "conky.conf copied." && sleep 1
-echo "You can edit conky at /etc/conky/conky.conf anytime." && sleep 1
-# apply the dunstrc to /etc/dunst/dunstrc and ~/config.dunst/dunstrc
-echo "Copying dunstrc..."
-sudo mkdir /etc/dunst && sudo touch /etc/dunst/dunstrc
-sudo mkdir ~/.config/dunst && sudo touch ~/config/dunst/dunstrc
-sudo cp -f $WIRED_DUNSTRC $DUNSTRC_CONFIG_LOCATION_1
-sudo cp -f $WIRED_DUNSTRC $DUNSTRC_CONFIG_LOCATION_2
-echo "dunstrc copied." && sleepy
-# apply the vimrc to ~/.vimrc
-echo "Copying vim configs..."
-sudo cp -f $WIRED_VIM_CONFIG $VIM_CONFIG
-echo "Vim configs copied. You can change it at ~/.vimrc."
-# set the default background image.
-# we are going to use wp/lainwp3.png.
-echo "Setting default wallpaper..." && sleep 1
-nitrogen --set-scaled $DEF_WP_LOCATION
-echo "Wallpaper saved. To change it, simply launch Nitrogen and choose whatever you would like." && sleep 1 
-# all done 
-echo "wiredWM has been installed." && sleep 1
-echo "In order to log into it, please log out of your current X Session and log into 'i3', which you can now find in your desktop environment list in your login manager." && sleep 1
-notify-send "wiredWM installer" "wiredWM has been installed." 
-sleep 1 && exit 
+apply_configs() {
+	# this function applies the configs for: 
+	#	- i3
+	#	- i3status
+	#	- conky
+	#	- dunst
+	#	- rofi
+	#	- vim
+	#	- and other relevant ones
+	# apply the i3-config file to /etc/i3/config and ~/.config/i3/config
+	echo "Copying wiredWM configuration files..."
+	sleep 1
+	echo "Copying i3-config..."
+	sudo cp -f $WIRED_i3_CONFIG $i3_CONFIG_1_LOCATION
+	sudo cp -f $WIRED_i3_CONFIG $i3_CONFIG_2_LOCATION
+	echo "Done! If needed, you can edit your configuration files at ~/.config/i3/config anytime." 
+	sleep 1
+	# apply the i3status-config file to /etc/i3status.conf
+	echo "Copying i3status-config..."
+	sudo cp -f $WIRED_i3STATUS_CONFIG $i3STATUS_LOCATION
+	sleep 1
+	echo "i3status-config copied." && sleep 1
+	echo "You can edit it anytime at /etc/i3status.conf" && sleep 1
+	# apply the conky config to /etc/conky/conky.conf
+	echo "Copying conky.conf..."
+	sudo cp -f $WIRED_CONKY_CONFIG $CONKY_CONFIG_LOCATION
+	sleep 1
+	echo "conky.conf copied." && sleep 1
+	echo "You can edit conky at /etc/conky/conky.conf anytime." && sleep 1
+	# apply the dunstrc to /etc/dunst/dunstrc and ~/config.dunst/dunstrc
+	echo "Copying dunstrc..."
+	sudo mkdir /etc/dunst && sudo touch /etc/dunst/dunstrc
+	sudo mkdir ~/.config/dunst && sudo touch ~/config/dunst/dunstrc
+	sudo cp -f $WIRED_DUNSTRC $DUNSTRC_CONFIG_LOCATION_1
+	sudo cp -f $WIRED_DUNSTRC $DUNSTRC_CONFIG_LOCATION_2
+	echo "dunstrc copied." && sleepy
+	# apply the vimrc to ~/.vimrc
+	echo "Copying vim configs..."
+	sudo cp -f $WIRED_VIM_CONFIG $VIM_CONFIG
+	echo "Vim configs copied. You can change it at ~/.vimrc."
+	sleep 1
+}
+wp_set() {
+	# this function uses nitrogen to set the default wallpaper.
+	# we are going to use wp/lainwp3.png.
+	echo "Setting default wallpaper..." && sleep 1
+	nitrogen --set-scaled $DEF_WP_LOCATION
+	echo "Wallpaper saved. To change it, simply launch Nitrogen and choose whatever you would like." 
+	sleep 1 
+}
+main() {
+	# 'main' function
+	# update system and install needed wiredWM packages.
+	echo "Updating repositories and preparing for installation..."
+	sleep 1
+	install_wired_pkgs
+	makeFolders	
+	apply_configs
+	wp_set
+	########################################################
+	# - - - finish up
+	echo "wiredWM has been installed." && sleep 1
+	echo "In order to log into it, please log out of your current X Session and log into 'i3', which you can now find in your desktop environment list in your login manager." && sleep 1
+	notify-send "wiredWM installer" "wiredWM has been installed." 
+	sleep 3 && exit 
+}
+########################################################
+# Script Entry Point
+########################################################
+main
