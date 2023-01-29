@@ -40,7 +40,7 @@ DUNSTRC_CONFIG_LOCATION_1="/etc/dunst/dunstrc"
 DUNSTRC_CONFIG_LOCATION_2="$HOME/.config/dunst/dunstrc"
 WIRED_DUNSTRC="$HOME/wiredWM/scripts-config/configs/dunstrc" 
 VIM_CONFIG="$HOME/.vimrc"
-WIRED_VIM_CONFIG="vimrc" 
+WIRED_VIM_CONFIG="$HOME/wiredWM/scripts-config/configs/vimrc" 
 DEF_WP_LOCATION="$HOME/wiredWM/wp/lain3wp.jpg"
 ################################
 # - - - Functions - - - 
