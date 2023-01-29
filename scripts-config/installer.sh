@@ -2,6 +2,7 @@
 #set -euo pipefail
 ########################################################
 # installer.sh -> for wiredWM
+#	- by @rav3ndust (https://github.com/rav3ndust.xyz)
 # This is the installer script for wiredWM. 
 # Important info for config files: 
 # - i3 config lives at /etc/i3/config and ~/.config/i3/config
@@ -60,7 +61,7 @@ makeFolders () {
 install_wired_pkgs () {	
 	# this function updates and intalls the needed deps for wiredWM
 	sudo apt-get update
-	sudo apt-get install i3 i3lock-fancy nitrogen xterm arandr rofi xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver amfora -y
+	sudo apt-get install -y i3 i3lock-fancy nitrogen xterm arandr rofi xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver amfora
 }
 apply_configs () {
 	# this function applies the configs for: 
@@ -117,10 +118,10 @@ main () {
 	# update system and install needed wiredWM packages.
 	echo "Updating repositories and preparing for installation..."
 	sleep 1
-	install_wired_pkgs
-	makeFolders	
-	apply_configs
-	wp_set
+	install_wired_pkgs		# install required pkgs
+	makeFolders				# make required folders
+	apply_configs			# apply custom configs
+	wp_set					# set wallpaper
 	# x x x x x x x x x x x x x x x x x x 
 	# - - - finish up
 	echo "wiredWM has been installed." && sleep 1
