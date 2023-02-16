@@ -236,5 +236,9 @@ exec --no-startup-id conky
 # we're using xautolock+i3lock to lock the screen after 10 mins of inactivity. The screen will turn purple and you'll be prompted for your password.
 # you can change the lock time by editing the number behind the -time flag. You can also edit the color of the lock screen using hexadecimal. Right now, it is set to purple (6a0dad)
 exec "xautolock -detectsleep -time 10 -locker \"i3 lock -c 6a0dad --show-failed-attempts\""
+
 # We're using xscreensaver to handle screensaving and autolock.
 exec --no-startup-id xscreensaver
+
+# we want to start the gnome-keyring-daemon so we can store secrets for browsers and other applications.
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
