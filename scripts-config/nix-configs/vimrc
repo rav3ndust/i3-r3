@@ -1,0 +1,10 @@
+set number
+set mouse=a
+set hlsearch
+set incsearch 
+set wrap
+set autoindent
+set cursorline 
+set cursorlineopt=number
+filetype indent on
+syntax enable
