@@ -163,15 +163,9 @@ i3_event_state_mask_t event_state_from_str(const char *str) {
     return result;
 }
 
-static char *font_pattern;
-
 CFGFUN(font, const char *font) {
     config.font = load_font(font, true);
     set_font(&config.font);
-
-    /* Save the font pattern for using it as bar font later on */
-    FREE(font_pattern);
-    font_pattern = sstrdup(font);
 }
 
 CFGFUN(binding, const char *bindtype, const char *modifiers, const char *key, const char *release, const char *border, const char *whole_window, const char *exclude_titlebar, const char *command) {
@@ -186,6 +180,11 @@ static char *current_mode;
 static bool current_mode_pango_markup;
 
 CFGFUN(mode_binding, const char *bindtype, const char *modifiers, const char *key, const char *release, const char *border, const char *whole_window, const char *exclude_titlebar, const char *command) {
+    if (current_mode == NULL) {
+        /* When using an invalid mode name, e.g. “default” */
+        return;
+    }
+
     configure_binding(bindtype, modifiers, key, release, border, whole_window, exclude_titlebar, command, current_mode, current_mode_pango_markup);
 }
 
@@ -230,6 +229,102 @@ CFGFUN(for_window, const char *command) {
     match_copy(&(assignment->match), current_match);
     assignment->dest.command = sstrdup(command);
     TAILQ_INSERT_TAIL(&assignments, assignment, assignments);
+}
+
+static void apply_gaps(gaps_t *gaps, gaps_mask_t mask, int value) {
+    if (gaps == NULL) {
+        return;
+    }
+    if (mask & GAPS_INNER) {
+        gaps->inner = value;
+    }
+    if (mask & GAPS_TOP) {
+        gaps->top = value;
+    }
+    if (mask & GAPS_RIGHT) {
+        gaps->right = value;
+    }
+    if (mask & GAPS_BOTTOM) {
+        gaps->bottom = value;
+    }
+    if (mask & GAPS_LEFT) {
+        gaps->left = value;
+    }
+}
+
+static void create_gaps_assignment(const char *workspace, const gaps_mask_t mask, const int pixels) {
+    if (mask == 0) {
+        return;
+    }
+
+    DLOG("Setting gaps for workspace %s", workspace);
+
+    bool found = false;
+    struct Workspace_Assignment *assignment;
+    TAILQ_FOREACH (assignment, &ws_assignments, ws_assignments) {
+        if (strcasecmp(assignment->name, workspace) == 0) {
+            found = true;
+            break;
+        }
+    }
+
+    /* Assignment does not yet exist, let's create it. */
+    if (!found) {
+        assignment = scalloc(1, sizeof(struct Workspace_Assignment));
+        assignment->name = sstrdup(workspace);
+        assignment->output = NULL;
+        TAILQ_INSERT_TAIL(&ws_assignments, assignment, ws_assignments);
+    }
+
+    assignment->gaps_mask |= mask;
+    apply_gaps(&assignment->gaps, mask, pixels);
+}
+
+static gaps_mask_t gaps_scope_to_mask(const char *scope) {
+    if (!strcmp(scope, "inner")) {
+        return GAPS_INNER;
+    } else if (!strcmp(scope, "outer")) {
+        return GAPS_OUTER;
+    } else if (!strcmp(scope, "vertical")) {
+        return GAPS_VERTICAL;
+    } else if (!strcmp(scope, "horizontal")) {
+        return GAPS_HORIZONTAL;
+    } else if (!strcmp(scope, "top")) {
+        return GAPS_TOP;
+    } else if (!strcmp(scope, "right")) {
+        return GAPS_RIGHT;
+    } else if (!strcmp(scope, "bottom")) {
+        return GAPS_BOTTOM;
+    } else if (!strcmp(scope, "left")) {
+        return GAPS_LEFT;
+    }
+    ELOG("Invalid command, cannot process scope %s", scope);
+    return 0;
+}
+
+CFGFUN(gaps, const char *workspace, const char *scope, const long value) {
+    int pixels = logical_px(value);
+    gaps_mask_t mask = gaps_scope_to_mask(scope);
+
+    if (workspace == NULL) {
+        apply_gaps(&config.gaps, mask, pixels);
+    } else {
+        create_gaps_assignment(workspace, mask, pixels);
+    }
+}
+
+CFGFUN(smart_borders, const char *enable) {
+    if (!strcmp(enable, "no_gaps"))
+        config.smart_borders = SMART_BORDERS_NO_GAPS;
+    else
+        config.smart_borders = boolstr(enable) ? SMART_BORDERS_ON : SMART_BORDERS_OFF;
+}
+
+CFGFUN(smart_gaps, const char *enable) {
+    if (!strcmp(enable, "inverse_outer"))
+        config.smart_gaps = SMART_GAPS_INVERSE_OUTER;
+    else
+        config.smart_gaps = boolstr(enable) ? SMART_GAPS_ON : SMART_GAPS_OFF;
 }
 
 CFGFUN(floating_minimum_size, const long width, const long height) {
@@ -298,7 +393,9 @@ CFGFUN(default_border, const char *windowtype, const char *border, const long wi
 }
 
 CFGFUN(hide_edge_borders, const char *borders) {
-    if (strcmp(borders, "smart") == 0)
+    if (strcmp(borders, "smart_no_gaps") == 0)
+        config.hide_edge_borders = HEBM_SMART_NO_GAPS;
+    else if (strcmp(borders, "smart") == 0)
         config.hide_edge_borders = HEBM_SMART;
     else if (strcmp(borders, "vertical") == 0)
         config.hide_edge_borders = HEBM_VERTICAL;
@@ -418,9 +515,11 @@ CFGFUN(workspace, const char *workspace, const char *output) {
 
         TAILQ_FOREACH (assignment, &ws_assignments, ws_assignments) {
             if (strcasecmp(assignment->name, workspace) == 0) {
-                ELOG("You have a duplicate workspace assignment for workspace \"%s\"\n",
-                     workspace);
-                return;
+                if (assignment->output != NULL) {
+                    ELOG("You have a duplicate workspace assignment for workspace \"%s\"\n",
+                         workspace);
+                    return;
+                }
             }
         }
 
@@ -561,6 +660,20 @@ CFGFUN(ipc_kill_timeout, const long timeout_ms) {
     ipc_set_kill_timeout(timeout_ms / 1000.0);
 }
 
+CFGFUN(tiling_drag, const char *value) {
+    if (strcmp(value, "modifier") == 0) {
+        config.tiling_drag = TILING_DRAG_MODIFIER;
+    } else if (strcmp(value, "titlebar") == 0) {
+        config.tiling_drag = TILING_DRAG_TITLEBAR;
+    } else if (strcmp(value, "modifier,titlebar") == 0 ||
+               strcmp(value, "titlebar,modifier") == 0) {
+        /* Switch the above to strtok() or similar if we ever grow more options */
+        config.tiling_drag = TILING_DRAG_MODIFIER_OR_TITLEBAR;
+    } else {
+        config.tiling_drag = TILING_DRAG_OFF;
+    }
+}
+
 /*******************************************************************************
  * Bar configuration (i3bar)
  ******************************************************************************/
@@ -598,6 +711,50 @@ CFGFUN(bar_output, const char *output) {
 
 CFGFUN(bar_verbose, const char *verbose) {
     current_bar->verbose = boolstr(verbose);
+}
+
+CFGFUN(bar_height, const long height) {
+    current_bar->bar_height = (uint32_t)height;
+}
+
+static void dlog_padding(void) {
+    DLOG("padding now: x=%d, y=%d, w=%d, h=%d\n",
+         current_bar->padding.x,
+         current_bar->padding.y,
+         current_bar->padding.width,
+         current_bar->padding.height);
+}
+
+CFGFUN(bar_padding_one, const long all) {
+    current_bar->padding.x = (uint32_t)all;
+    current_bar->padding.y = (uint32_t)all;
+    current_bar->padding.width = (uint32_t)all;
+    current_bar->padding.height = (uint32_t)all;
+    dlog_padding();
+}
+
+CFGFUN(bar_padding_two, const long top_and_bottom, const long right_and_left) {
+    current_bar->padding.x = (uint32_t)right_and_left;
+    current_bar->padding.y = (uint32_t)top_and_bottom;
+    current_bar->padding.width = (uint32_t)right_and_left;
+    current_bar->padding.height = (uint32_t)top_and_bottom;
+    dlog_padding();
+}
+
+CFGFUN(bar_padding_three, const long top, const long right_and_left, const long bottom) {
+    current_bar->padding.x = (uint32_t)right_and_left;
+    current_bar->padding.y = (uint32_t)top;
+    current_bar->padding.width = (uint32_t)right_and_left;
+    current_bar->padding.height = (uint32_t)bottom;
+    dlog_padding();
+}
+
+CFGFUN(bar_padding_four, const long top, const long right, const long bottom, const long left) {
+    current_bar->padding.x = (uint32_t)left;
+    current_bar->padding.y = (uint32_t)top;
+    current_bar->padding.width = (uint32_t)right;
+    current_bar->padding.height = (uint32_t)bottom;
+    dlog_padding();
 }
 
 CFGFUN(bar_modifier, const char *modifiers) {
@@ -716,6 +873,11 @@ CFGFUN(bar_status_command, const char *command) {
     current_bar->status_command = sstrdup(command);
 }
 
+CFGFUN(bar_workspace_command, const char *command) {
+    FREE(current_bar->workspace_command);
+    current_bar->workspace_command = sstrdup(command);
+}
+
 CFGFUN(bar_binding_mode_indicator, const char *value) {
     current_bar->hide_binding_mode_indicator = !boolstr(value);
 }
@@ -751,10 +913,6 @@ CFGFUN(bar_finish) {
         sasprintf(&current_bar->id, "bar-%d", config.number_barconfigs);
 
     config.number_barconfigs++;
-
-    /* If no font was explicitly set, we use the i3 font as default */
-    if (current_bar->font == NULL && font_pattern != NULL)
-        current_bar->font = sstrdup(font_pattern);
 
     TAILQ_INSERT_TAIL(&barconfigs, current_bar, configs);
     /* Simply reset the pointer, but don't free the resources. */

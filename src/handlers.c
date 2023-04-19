@@ -214,18 +214,30 @@ static void handle_motion_notify(xcb_motion_notify_event_t *event) {
         return;
 
     /* see over which rect the user is */
-    Con *current;
-    TAILQ_FOREACH_REVERSE (current, &(con->nodes_head), nodes_head, nodes) {
-        if (!rect_contains(current->deco_rect, event->event_x, event->event_y))
-            continue;
+    if (con->window != NULL) {
+        if (rect_contains(con->deco_rect, event->event_x, event->event_y)) {
+            /* We found the rect, let’s see if this window is focused */
+            if (TAILQ_FIRST(&(con->parent->focus_head)) == con)
+                return;
 
-        /* We found the rect, let’s see if this window is focused */
-        if (TAILQ_FIRST(&(con->focus_head)) == current)
+            con_focus(con);
+            x_push_changes(croot);
             return;
+        }
+    } else {
+        Con *current;
+        TAILQ_FOREACH_REVERSE (current, &(con->nodes_head), nodes_head, nodes) {
+            if (!rect_contains(current->deco_rect, event->event_x, event->event_y))
+                continue;
 
-        con_focus(current);
-        x_push_changes(croot);
-        return;
+            /* We found the rect, let’s see if this window is focused */
+            if (TAILQ_FIRST(&(con->focus_head)) == current)
+                return;
+
+            con_focus(current);
+            x_push_changes(croot);
+            return;
+        }
     }
 }
 
@@ -268,7 +280,7 @@ static void handle_map_request(xcb_map_request_event_t *event) {
  * Configure requests are received when the application wants to resize windows
  * on their own.
  *
- * We generate a synthethic configure notify event to signalize the client its
+ * We generate a synthetic configure notify event to signalize the client its
  * "new" position.
  *
  */
@@ -318,15 +330,9 @@ static void handle_configure_request(xcb_configure_request_event_t *event) {
     Con *fullscreen = con_get_fullscreen_covering_ws(workspace);
 
     if (fullscreen != con && con_is_floating(con) && con_is_leaf(con)) {
-        /* find the height for the decorations */
-        int deco_height = con->deco_rect.height;
         /* we actually need to apply the size/position changes to the *parent*
          * container */
         Rect bsr = con_border_style_rect(con);
-        if (con->border_style == BS_NORMAL) {
-            bsr.y += deco_height;
-            bsr.height -= deco_height;
-        }
         Con *floatingcon = con->parent;
         Rect newrect = floatingcon->rect;
 
@@ -799,7 +805,7 @@ static void handle_client_message(xcb_client_message_event_t *event) {
     } else if (event->type == A_WM_CHANGE_STATE) {
         /* http://tronche.com/gui/x/icccm/sec-4.html#s-4.1.4 */
         if (event->data.data32[0] == XCB_ICCCM_WM_STATE_ICONIC) {
-            /* For compatiblity reasons, Wine will request iconic state and cannot ensure that the WM has agreed on it;
+            /* For compatibility reasons, Wine will request iconic state and cannot ensure that the WM has agreed on it;
              * immediately revert to normal to avoid being stuck in a paused state. */
             DLOG("Client has requested iconic state, rejecting. (window = %08x)\n", event->window);
             long data[] = {XCB_ICCCM_WM_STATE_NORMAL, XCB_NONE};
@@ -1182,14 +1188,14 @@ static bool handle_machine_change(Con *con, xcb_get_property_reply_t *prop) {
 }
 
 /*
- * Handles the _MOTIF_WM_HINTS property of specifing window deocration settings.
+ * Handles the _MOTIF_WM_HINTS property of specifying window deocration settings.
  *
  */
 static bool handle_motif_hints_change(Con *con, xcb_get_property_reply_t *prop) {
     border_style_t motif_border_style;
-    window_update_motif_hints(con->window, prop, &motif_border_style);
+    bool has_mwm_hints = window_update_motif_hints(con->window, prop, &motif_border_style);
 
-    if (motif_border_style != con->border_style && motif_border_style != BS_NORMAL) {
+    if (has_mwm_hints && motif_border_style != con->border_style) {
         DLOG("Update border style of con %p to %d\n", con, motif_border_style);
         con_set_border_style(con, motif_border_style, con->current_border_width);
 

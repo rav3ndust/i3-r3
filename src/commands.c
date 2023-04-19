@@ -747,6 +747,8 @@ void cmd_border(I3_CMD, const char *border_style_str, long border_width) {
             return;
         }
 
+        /* User changed the border */
+        current->con->max_user_border_style = border_style;
         const int con_border_width = border_width_from_style(border_style, border_width, current->con);
         con_set_border_style(current->con, border_style, con_border_width);
     }
@@ -842,6 +844,13 @@ out:
     free(buf);
 }
 
+static void disable_global_fullscreen(void) {
+    Con *fs = con_get_fullscreen_con(croot, CF_GLOBAL);
+    if (fs) {
+        con_disable_fullscreen(fs);
+    }
+}
+
 /*
  * Implementation of 'workspace next|prev|next_on_output|prev_on_output'.
  *
@@ -851,10 +860,7 @@ void cmd_workspace(I3_CMD, const char *which) {
 
     DLOG("which=%s\n", which);
 
-    if (con_get_fullscreen_con(croot, CF_GLOBAL)) {
-        yerror("Cannot switch workspace while in global fullscreen");
-        return;
-    }
+    disable_global_fullscreen();
 
     if (strcmp(which, "next") == 0)
         ws = workspace_next();
@@ -883,10 +889,7 @@ void cmd_workspace(I3_CMD, const char *which) {
 void cmd_workspace_number(I3_CMD, const char *which, const char *_no_auto_back_and_forth) {
     const bool no_auto_back_and_forth = (_no_auto_back_and_forth != NULL);
 
-    if (con_get_fullscreen_con(croot, CF_GLOBAL)) {
-        yerror("Cannot switch workspace while in global fullscreen");
-        return;
-    }
+    disable_global_fullscreen();
 
     long parsed_num = ws_name_to_number(which);
     if (parsed_num == -1) {
@@ -918,10 +921,7 @@ void cmd_workspace_number(I3_CMD, const char *which, const char *_no_auto_back_a
  *
  */
 void cmd_workspace_back_and_forth(I3_CMD) {
-    if (con_get_fullscreen_con(croot, CF_GLOBAL)) {
-        yerror("Cannot switch workspace while in global fullscreen");
-        return;
-    }
+    disable_global_fullscreen();
 
     workspace_back_and_forth();
 
@@ -942,10 +942,7 @@ void cmd_workspace_name(I3_CMD, const char *name, const char *_no_auto_back_and_
         return;
     }
 
-    if (con_get_fullscreen_con(croot, CF_GLOBAL)) {
-        yerror("Cannot switch workspace while in global fullscreen");
-        return;
-    }
+    disable_global_fullscreen();
 
     DLOG("should switch to workspace %s\n", name);
     if (!no_auto_back_and_forth && maybe_back_and_forth(cmd_output, name)) {
@@ -1030,11 +1027,16 @@ typedef struct user_output_name {
 typedef TAILQ_HEAD(user_output_names_head, user_output_name) user_output_names_head;
 
 static void user_output_names_add(user_output_names_head *list, const char *name) {
-    if (strcmp(name, "next") == 0) {
-        /* "next" here works like a wildcard: It "expands" to all available
-         * outputs. */
+    const bool get_non_primary = (strcasecmp("nonprimary", name) == 0);
+    if (get_non_primary || strcmp(name, "next") == 0) {
+        /* "next" (or "nonprimary") here work like a wildcard: It "expands" to
+         * all available (or non-primary) outputs. */
         Output *output;
         TAILQ_FOREACH (output, &outputs, outputs) {
+            if (get_non_primary && output->primary) {
+                continue;
+            }
+
             user_output_name *co = scalloc(sizeof(user_output_name), 1);
             co->name = sstrdup(output_primary_name(output));
             TAILQ_INSERT_TAIL(list, co, user_output_names);
@@ -1318,7 +1320,7 @@ void cmd_focus_direction(I3_CMD, const char *direction_str) {
     HANDLE_EMPTY_MATCH;
     CMD_FOCUS_WARN_CHILDREN;
 
-    direction_t direction;
+    direction_t direction = D_LEFT;
     position_t position;
     bool auto_direction = true;
     if (strcmp(direction_str, "prev") == 0) {
@@ -1452,7 +1454,7 @@ void cmd_focus_level(I3_CMD, const char *level) {
  * Implementation of 'focus'.
  *
  */
-void cmd_focus(I3_CMD) {
+void cmd_focus(I3_CMD, bool focus_workspace) {
     DLOG("current_match = %p\n", current_match);
 
     if (match_is_empty(current_match)) {
@@ -1474,11 +1476,12 @@ void cmd_focus(I3_CMD) {
         Con *ws = con_get_workspace(current->con);
         /* If no workspace could be found, this was a dock window.
          * Just skip it, you cannot focus dock windows. */
-        if (!ws)
+        if (!ws) {
             continue;
+        }
 
         /* In case this is a scratchpad window, call scratchpad_show(). */
-        if (ws == __i3_scratch) {
+        if (ws == __i3_scratch && !focus_workspace) {
             scratchpad_show(current->con);
             /* While for the normal focus case we can change focus multiple
              * times and only a single window ends up focused, we could show
@@ -1486,8 +1489,15 @@ void cmd_focus(I3_CMD) {
             break;
         }
 
-        LOG("focusing %p / %s\n", current->con, current->con->name);
-        con_activate_unblock(current->con);
+        if (focus_workspace) {
+            /* Show the workspace of the matched container, without necessarily
+             * focusing it. */
+            LOG("focusing workspace %p / %s - %p / %s\n", current->con, current->con->name, ws, ws->name);
+            workspace_show(ws);
+        } else {
+            LOG("focusing %p / %s\n", current->con, current->con->name);
+            con_activate_unblock(current->con);
+        }
     }
 
     cmd_output->needs_tree_render = true;
@@ -2371,4 +2381,172 @@ void cmd_debuglog(I3_CMD, const char *argument) {
     }
     // XXX: default reply for now, make this a better reply
     ysuccess(true);
+}
+
+static int *gaps_inner(gaps_t *gaps) {
+    return &(gaps->inner);
+}
+
+static int *gaps_top(gaps_t *gaps) {
+    return &(gaps->top);
+}
+
+static int *gaps_left(gaps_t *gaps) {
+    return &(gaps->left);
+}
+
+static int *gaps_bottom(gaps_t *gaps) {
+    return &(gaps->bottom);
+}
+
+static int *gaps_right(gaps_t *gaps) {
+    return &(gaps->right);
+}
+
+typedef int *(*gap_accessor)(gaps_t *);
+
+static bool gaps_update(gap_accessor get, const char *scope, const char *mode, int pixels) {
+    DLOG("gaps_update(scope=%s, mode=%s, pixels=%d)\n", scope, mode, pixels);
+    Con *workspace = con_get_workspace(focused);
+
+    const int global_gap_size = *get(&(config.gaps));
+    int current_value = global_gap_size;
+    if (strcmp(scope, "current") == 0) {
+        current_value += *get(&(workspace->gaps));
+    }
+    DLOG("global_gap_size=%d, current_value=%d\n", global_gap_size, current_value);
+
+    bool reset = false;
+    if (strcmp(mode, "plus") == 0)
+        current_value += pixels;
+    else if (strcmp(mode, "minus") == 0)
+        current_value -= pixels;
+    else if (strcmp(mode, "set") == 0) {
+        current_value = pixels;
+        reset = true;
+    } else if (strcmp(mode, "toggle") == 0) {
+        current_value = !current_value * pixels;
+        reset = true;
+    } else {
+        ELOG("Invalid mode %s when changing gaps", mode);
+        return false;
+    }
+
+    /* See https://github.com/Airblader/i3/issues/262 */
+    int min_value = 0;
+    const bool is_outer = get(&(config.gaps)) != gaps_inner(&(config.gaps));
+    if (is_outer) {
+        /* Outer gaps can compensate inner gaps. */
+        if (strcmp(scope, "all") == 0) {
+            min_value = -config.gaps.inner;
+        } else {
+            min_value = -config.gaps.inner - workspace->gaps.inner;
+        }
+    }
+
+    if (current_value < min_value) {
+        current_value = min_value;
+    }
+
+    if (strcmp(scope, "all") == 0) {
+        Con *output = NULL;
+        TAILQ_FOREACH (output, &(croot->nodes_head), nodes) {
+            Con *cur_ws = NULL;
+            Con *content = output_get_content(output);
+            TAILQ_FOREACH (cur_ws, &(content->nodes_head), nodes) {
+                int *gaps_value = get(&(cur_ws->gaps));
+                DLOG("current gaps_value = %d\n", *gaps_value);
+
+                if (reset) {
+                    *gaps_value = 0;
+                } else {
+                    int max_compensate = 0;
+                    if (is_outer) {
+                        max_compensate = config.gaps.inner;
+                    }
+                    if (*gaps_value + current_value + max_compensate < 0) {
+                        /* Enforce new per-workspace gap size minimum value (in case
+                           current_value is smaller than before): the workspace can at most
+                           have a negative gap size of -current_value - max_compensate. */
+                        *gaps_value = -current_value - max_compensate;
+                    }
+                }
+                DLOG("gaps_value after fix = %d\n", *gaps_value);
+            }
+        }
+
+        *get(&(config.gaps)) = current_value;
+        DLOG("global gaps value after fix = %d\n", *get(&(config.gaps)));
+    } else {
+        int *gaps_value = get(&(workspace->gaps));
+        *gaps_value = current_value - global_gap_size;
+    }
+
+    return true;
+}
+
+/**
+ * Implementation of 'gaps inner|outer|top|right|bottom|left|horizontal|vertical current|all set|plus|minus|toggle <px>'
+ *
+ */
+void cmd_gaps(I3_CMD, const char *type, const char *scope, const char *mode, const char *value) {
+    int pixels = logical_px(atoi(value));
+
+    if (!strcmp(type, "inner")) {
+        if (!gaps_update(gaps_inner, scope, mode, pixels)) {
+            goto error;
+        }
+        /* Update all workspaces with a no-op change (plus 0) so that the
+         * minimum value is re-calculated and applied as a side effect. */
+        if (!gaps_update(gaps_top, "all", "plus", 0) ||
+            !gaps_update(gaps_bottom, "all", "plus", 0) ||
+            !gaps_update(gaps_right, "all", "plus", 0) ||
+            !gaps_update(gaps_left, "all", "plus", 0)) {
+            goto error;
+        }
+    } else if (!strcmp(type, "outer")) {
+        if (!gaps_update(gaps_top, scope, mode, pixels) ||
+            !gaps_update(gaps_bottom, scope, mode, pixels) ||
+            !gaps_update(gaps_right, scope, mode, pixels) ||
+            !gaps_update(gaps_left, scope, mode, pixels)) {
+            goto error;
+        }
+    } else if (!strcmp(type, "vertical")) {
+        if (!gaps_update(gaps_top, scope, mode, pixels) ||
+            !gaps_update(gaps_bottom, scope, mode, pixels)) {
+            goto error;
+        }
+    } else if (!strcmp(type, "horizontal")) {
+        if (!gaps_update(gaps_right, scope, mode, pixels) ||
+            !gaps_update(gaps_left, scope, mode, pixels)) {
+            goto error;
+        }
+    } else if (!strcmp(type, "top")) {
+        if (!gaps_update(gaps_top, scope, mode, pixels)) {
+            goto error;
+        }
+    } else if (!strcmp(type, "bottom")) {
+        if (!gaps_update(gaps_bottom, scope, mode, pixels)) {
+            goto error;
+        }
+    } else if (!strcmp(type, "right")) {
+        if (!gaps_update(gaps_right, scope, mode, pixels)) {
+            goto error;
+        }
+    } else if (!strcmp(type, "left")) {
+        if (!gaps_update(gaps_left, scope, mode, pixels)) {
+            goto error;
+        }
+    } else {
+        ELOG("Invalid type %s when changing gaps", type);
+        goto error;
+    }
+
+    cmd_output->needs_tree_render = true;
+    // XXX: default reply for now, make this a better reply
+    ysuccess(true);
+    return;
+
+error:
+    ysuccess(false);
 }

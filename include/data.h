@@ -47,6 +47,7 @@ typedef struct Con Con;
 typedef struct Match Match;
 typedef struct Assignment Assignment;
 typedef struct Window i3Window;
+typedef struct gaps_t gaps_t;
 typedef struct mark_t mark_t;
 
 /******************************************************************************
@@ -61,9 +62,11 @@ typedef enum { NO_ORIENTATION = 0,
                VERT } orientation_t;
 typedef enum { BEFORE,
                AFTER } position_t;
-typedef enum { BS_NORMAL = 0,
-               BS_NONE = 1,
-               BS_PIXEL = 2 } border_style_t;
+typedef enum {
+    BS_NONE = 0,
+    BS_PIXEL = 1,
+    BS_NORMAL = 2,
+} border_style_t;
 
 /** parameter to specify whether tree_close_internal() and x_window_kill() should kill
  * only this specific window or the whole X11 client */
@@ -78,11 +81,20 @@ typedef enum { ADJ_NONE = 0,
                ADJ_UPPER_SCREEN_EDGE = (1 << 2),
                ADJ_LOWER_SCREEN_EDGE = (1 << 4) } adjacent_t;
 
+typedef enum { SMART_BORDERS_OFF,
+               SMART_BORDERS_ON,
+               SMART_BORDERS_NO_GAPS } smart_borders_t;
+
+typedef enum { SMART_GAPS_OFF,
+               SMART_GAPS_ON,
+               SMART_GAPS_INVERSE_OUTER } smart_gaps_t;
+
 typedef enum { HEBM_NONE = ADJ_NONE,
                HEBM_VERTICAL = ADJ_LEFT_SCREEN_EDGE | ADJ_RIGHT_SCREEN_EDGE,
                HEBM_HORIZONTAL = ADJ_UPPER_SCREEN_EDGE | ADJ_LOWER_SCREEN_EDGE,
                HEBM_BOTH = HEBM_VERTICAL | HEBM_HORIZONTAL,
-               HEBM_SMART = (1 << 5) } hide_edge_borders_mode_t;
+               HEBM_SMART = (1 << 5),
+               HEBM_SMART_NO_GAPS = (1 << 6) } hide_edge_borders_mode_t;
 
 typedef enum { MM_REPLACE,
                MM_ADD } mark_mode_t;
@@ -134,6 +146,25 @@ typedef enum {
     POINTER_WARPING_OUTPUT = 0,
     POINTER_WARPING_NONE = 1
 } warping_t;
+
+struct gaps_t {
+    int inner;
+    int top;
+    int right;
+    int bottom;
+    int left;
+};
+
+typedef enum {
+    GAPS_INNER = (1 << 0),
+    GAPS_TOP = (1 << 1),
+    GAPS_RIGHT = (1 << 2),
+    GAPS_BOTTOM = (1 << 3),
+    GAPS_LEFT = (1 << 4),
+    GAPS_VERTICAL = (GAPS_TOP | GAPS_BOTTOM),
+    GAPS_HORIZONTAL = (GAPS_RIGHT | GAPS_LEFT),
+    GAPS_OUTER = (GAPS_VERTICAL | GAPS_HORIZONTAL),
+} gaps_mask_t;
 
 /**
  * Focus wrapping modes.
@@ -202,12 +233,14 @@ struct deco_render_params {
 };
 
 /**
- * Stores which workspace (by name or number) goes to which output.
+ * Stores which workspace (by name or number) goes to which output and its gaps config.
  *
  */
 struct Workspace_Assignment {
     char *name;
     char *output;
+    gaps_t gaps;
+    gaps_mask_t gaps_mask;
 
     TAILQ_ENTRY(Workspace_Assignment) ws_assignments;
 };
@@ -643,6 +676,9 @@ struct Con {
      * workspace is not a named workspace (for named workspaces, num == -1) */
     int num;
 
+    /** Only applicable for containers of type CT_WORKSPACE. */
+    gaps_t gaps;
+
     struct Con *parent;
 
     /* The position and size for this con. These coordinates are absolute. Note
@@ -721,7 +757,16 @@ struct Con {
      * layout in workspace_layout and creates a new split container with that
      * layout whenever a new container is attached to the workspace. */
     layout_t layout, last_split_layout, workspace_layout;
+
     border_style_t border_style;
+    /* When the border style of a con changes because of motif hints, we don't
+     * want to set more decoration that the user wants. The user's preference is determined by these:
+     * 1. For new tiling windows, as set by `default_border`
+     * 2. For new floating windows, as set by `default_floating_border`
+     * 3. For all windows that the user runs the `border` command, whatever is
+     * the result of that command for that window. */
+    border_style_t max_user_border_style;
+
     /** floating? (= not in tiling layout) This cannot be simply a bool
      * because we want to keep track of whether the status was set by the
      * application (by setting _NET_WM_WINDOW_TYPE appropriately) or by the

@@ -438,7 +438,7 @@ static void parse_config(struct parser_ctx *ctx, const char *input, struct conte
             const char *error_line = start_of_line(walk, input);
 
             /* Contains the same amount of characters as 'input' has, but with
-             * the unparseable part highlighted using ^ characters. */
+             * the unparsable part highlighted using ^ characters. */
             char *position = scalloc(strlen(error_line) + 1, 1);
             const char *copywalk;
             for (copywalk = error_line;
@@ -919,7 +919,7 @@ parse_file_result_t parse_file(struct parser_ctx *ctx, const char *f, IncludedFi
             continuation = NULL;
         }
 
-        strncpy(buf + strlen(buf), buffer, strlen(buffer) + 1);
+        strcpy(buf + strlen(buf), buffer);
 
         /* Skip comments and empty lines. */
         if (skip_line || comment) {
@@ -1001,9 +1001,14 @@ parse_file_result_t parse_file(struct parser_ctx *ctx, const char *f, IncludedFi
         char *next;
         for (next = bufcopy;
              next < (bufcopy + stbuf.st_size) &&
-             (next = strcasestr(next, current->key)) != NULL;
-             next += strlen(current->key)) {
-            *next = '_';
+             (next = strcasestr(next, current->key)) != NULL;) {
+            /* We need to invalidate variables completely (otherwise we may count
+             * the same variable more than once, thus causing buffer overflow or
+             * allocation failure) with spaces (variable names cannot contain spaces) */
+            char *end = next + strlen(current->key);
+            while (next < end) {
+                *next++ = ' ';
+            }
             extra_bytes += extra;
         }
     }
@@ -1038,7 +1043,7 @@ parse_file_result_t parse_file(struct parser_ctx *ctx, const char *f, IncludedFi
         } else {
             /* Copy until the next variable, then copy its value */
             strncpy(destwalk, walk, distance);
-            strncpy(destwalk + distance, nearest->value, strlen(nearest->value));
+            strcpy(destwalk + distance, nearest->value);
             walk += distance + strlen(nearest->key);
             destwalk += distance + strlen(nearest->value);
         }
