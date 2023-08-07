@@ -61,7 +61,7 @@ makeFolders () {
 install_wired_pkgs () {	
 	# this function updates and intalls the needed deps for wiredWM
 	sudo apt-get update
-	sudo apt-get install -y i3 i3lock-fancy nitrogen xterm arandr rofi xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver amfora
+	sudo apt-get install -y i3 i3lock-fancy nitrogen pulseaudio-utils xterm arandr rofi xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver amfora
 }
 apply_configs () {
 	# this function applies the configs for: 
