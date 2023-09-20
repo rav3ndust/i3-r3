@@ -24,7 +24,8 @@
 # - we also have a custom conky, so we need the *conky* package.
 # - we use *vim* for text editing.
 # - *suckless-tools* is a collection of small software tools from the Suckless community.
-# - we use *lxpolkit* for user authentication when elevated system privs are needed. 
+# - we use *lxpolkit* for user authentication when elevated system privs are needed.
+# - we use *lxappearance* for handling things like cursor selection and other graphical tweaks.
 # - we use *nnn* for terminal file management. 
 # - we use *cmus* for playing audio in the terminal. 
 # - we use *mpv* for handling multimedia files.
@@ -61,7 +62,7 @@ makeFolders () {
 install_wired_pkgs () {	
 	# this function updates and intalls the needed deps for wiredWM
 	sudo apt-get update
-	sudo apt-get install -y i3 i3lock-fancy nitrogen pulseaudio-utils xterm arandr rofi xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit vim nnn cmus xscreensaver amfora
+	sudo apt-get install -y i3 i3lock-fancy nitrogen pulseaudio-utils xterm arandr rofi xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit lxappearance vim nnn cmus xscreensaver amfora
 }
 apply_configs () {
 	# this function applies the configs for: 
