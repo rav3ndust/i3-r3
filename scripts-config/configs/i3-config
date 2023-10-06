@@ -16,11 +16,25 @@ set $mod Mod4
 #for_window [class="[.]*"] floating enable
 
 # for window title bars
-for_window [class="^.*"] border pixel
+for_window [class="^.*"] border pixel 2 
+
+# for gaps
+#####################################
+# - - smart gaps.
+smart_gaps on 
+smart_borders on
+# - - manual gaps.
+# You can manually adjust their values below.
+#gaps inner 5
+#gaps outer 5 
+
+#for_window [class=".*"] border pixel 2 gaps inner 50 gaps outer 20 
+
 # for border colors
 # the final hex code is window border. currently = Neon Pink (#FF10F0)
 client.focused #555555 #555555 #ffffff #2e9ef4    #FF10F0 
-
+# gaps 
+#gaps inner all set 20
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -37,8 +51,8 @@ font pango:monospace 8
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# volumeicon provides us a simple, GUI way to control volume with mouse.
-# (volumeicon on arch/ubuntu/debian.)
+# volumeicon provides us a simple, GUI way to control volume with mouse
+# (volumeicon on arch/ubuntu/deb.)
 # (if using pipewire, use pasystray.)
 exec --no-startup-id volumeicon
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -48,8 +62,8 @@ exec --no-startup-id volumeicon
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# BlueMan (bluetooth manager) is used to handle Bluetooth connections. 
-# We use `blueman-applet` to display the BT status in the bar. 
+# Blueman (bluetooth-manager) is used to handle Bluetooth connections.
+# We use `blueman-applet` to display the BT status in the bar.
 exec --no-startup-id blueman-applet
 
 # we currently use dunst to handle system notifications.
