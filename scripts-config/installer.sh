@@ -13,10 +13,12 @@
 # Some notes on the packages we need to download on installation: 
 # - we use *flameshot* for taking screenshots.
 # - we use *nm-applet* for handling networks - i3 ships with this.
+# - we use *blueman* for handling bluetooth connections. 
+#	- *blueman-applet* is the applet for interfacing with connections.
 # - we use *nitrogen* for handling wallpaper selection and restoring with GUI.
 # - we use *feh* for handling wallpapers through CLI.
 # - we use *arandr* for graphical display management.
-# - we use *volumeicon-alsa* for a GUI-friendly way of volume management.
+# - we use *volumeicon* for a GUI-friendly way of volume management.
 # - we use *kitty* and *stterm* for lightweight terminals.
 #	- note that stterm will be better for older machines.
 #	- users can set their favorite terminal in the i3 config file.
@@ -62,7 +64,7 @@ makeFolders () {
 install_wired_pkgs () {	
 	# this function updates and intalls the needed deps for wiredWM
 	sudo apt-get update
-	sudo apt-get install -y i3 i3lock-fancy nitrogen pulseaudio-utils xterm arandr rofi xss-lock feh volumeicon-alsa polybar flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit lxappearance vim nnn cmus xscreensaver amfora
+	sudo apt-get install -y i3 i3lock-fancy nitrogen pulseaudio-utils xterm arandr rofi xss-lock feh volumeicon-alsa polybar blueman flameshot pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit lxappearance vim nnn cmus xscreensaver amfora
 }
 apply_configs () {
 	# this function applies the configs for: 
