@@ -38,8 +38,7 @@ font pango:monospace 8
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # volumeicon provides us a simple, GUI way to control volume with mouse.
-# (volumeicon-alsa "ubuntu/mint/deb")
-# (volumeicon on arch.)
+# (volumeicon on arch/ubuntu/debian.)
 # (if using pipewire, use pasystray.)
 exec --no-startup-id volumeicon
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -48,6 +47,10 @@ exec --no-startup-id volumeicon
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
+
+# BlueMan (bluetooth manager) is used to handle Bluetooth connections. 
+# We use `blueman-applet` to display the BT status in the bar. 
+exec --no-startup-id blueman-applet
 
 # we currently use dunst to handle system notifications.
 # make sure it starts on launch, because apps that rely on notifications might hang.
