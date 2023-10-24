@@ -114,6 +114,17 @@ wp_set () {
 	echo "Wallpaper saved. To change it, simply launch Nitrogen and choose whatever you would like." 
 	sleep 1 
 }
+override_fp () {
+	# when running flatpak applications, some apps don't respect user appearance settings. 
+ 	# we noticed an issue with cursors being consistent on certain apps, such as firefox. 
+  	# this function runs flatpak override commands to make the appearance more consistent.
+   	local location_1="/home/$USER/.icons/"
+    	local location_2="/usr/share/icons/"
+     	echo "Overriding Flatpak appearance settings..." && sleep 1
+     	flatpak --user override --filesystem=$location_1:ro
+      	flatpak --user override --filesystem=$location_2:ro
+        echo "Flatpak overrides finished." && sleep 1
+}
 main () {
 	# 'main' function
 	# update system and install needed wiredWM packages.
@@ -121,7 +132,8 @@ main () {
 	sleep 1
 	install_wired_pkgs		
 	makeFolders				
-	apply_configs			
+	apply_configs	
+ 	override_fp
 	wp_set					
 	# x x x x x x x x x x x x x x x x x x 
 	# - - - finish up
