@@ -3,7 +3,7 @@
 
 ### Welcome to the Wired
 
-**wiredWM** is rav3ndust's personal fork of i3, which is a tiling window manager for X11.
+**wiredWM** is rav3ndust's personal fork of i3, which is a tiling window manager for X11. There is also work ongoing to bring the configs over to Sway, for Wayland.
 
 ![image]![image](https://github.com/rav3ndust/wiredWM/assets/35274771/93f7b471-6b64-4f0d-b542-def097533ffe)
 
