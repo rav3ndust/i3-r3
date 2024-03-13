@@ -55,7 +55,8 @@ POLYBAR_CONFIG_LOCATION="$HOME/.config/polybar/config.ini"
 DEF_WP_LOCATION="$HOME/wiredWM/wp/lain2.jpg"
 CONFIGS="$HOME/wiredWM/scripts-config/configs"
 ################################
-function makeFolders() {
+makeFolders () {
+	# this function creates the necessary folders needed for some of our config files
 	sudo mkdir /etc/i3 && sudo touch /etc/i3/config
 	sudo mkdir $HOME/.config/i3 && sudo touch $HOME/.config/i3/config
 	sudo touch /etc/i3status.conf
@@ -63,16 +64,20 @@ function makeFolders() {
 	sudo mkdir $HOME/.config/dunst && sudo touch $HOME/.config/dunst/dunstrc
 	sudo mkdir /etc/conky && sudo touch /etc/conky/conky.conf
 }
-function updater() {		# this function updates repositories
+updater () {		
+	# this function updates arch repos
 	sudo pacman -Sy
 }
-function i3_install() {		# this function installs vanilla i3
+i3_install () {		
+	# this function installs vanilla i3
 	sudo pacman -S i3-wm i3status
 }
-function wired_packs() {	# this function intalls the needed deps for wiredWM
+wired_packs () {	
+	# this function intalls the needed deps for wiredWM
 	sudo pacman -S git nitrogen lxsession lxapperance arandr xterm xscreensaver fish xorg-xkill xautolock flameshot alacritty micro dunst amfora kitty feh code network-manager-applet conky vim sddm nnn picom chromium nemo volumeicon pavucontrol okular rofi
 }
-function enable_AUR() {		# builds yay for using the AUR
+enable_AUR () {		
+	# builds yay for using the AUR
 	echo "Enabling the Arch User Repository (AUR)..."
 	echo "Cloning the 'yay' repository from https://aur.archlinux.org/yay.git..."
 	git clone https://aur.archlinux.org/yay.git
@@ -80,7 +85,16 @@ function enable_AUR() {		# builds yay for using the AUR
 	cd yay && makepkg -si
 	echo "Yay AUR helper built."
 }
-function polkit-dumb-install() { # builds polkit-dumb-agent
+meteo_qt_install () {
+	# grabs meteo-qt from the aur.
+ 	# on wired, we use this to give the user a convenient way to display the weather in their i3bar.
+  	local pkg="meteo-qt"
+   	echo "Installing $pkg for you - it shows the weather in your i3bar!" && sleep 1
+    	yay -S $pkg
+     	echo "$pkg installed." && sleep 1
+}
+polkit-dumb-install () { 
+	# builds polkit-dumb-agent
 	echo "Installing polkit agent for superuser priveleges..."
 	yay -S polkit-dumb-agent
 	echo "Polkit agent installed."
@@ -108,6 +122,8 @@ echo "Lockscreen downloaded. Moving on..."
 echo "Downloading i3 and its components. Please be patient."
 i3_install
 sleep 1
+# grab meteo-qt for displaying weather in i3bar
+meteo_qt_install
 # download polkit-dumb-agent from AUR for elevated privs when needed.
 polkit-dumb-install
 sleep 1
