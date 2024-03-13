@@ -66,9 +66,12 @@ exec --no-startup-id blueman-applet
 # make sure it starts on launch, because apps that rely on notifications might hang.
 exec --no-startup-id dunst
 
+# we use `meteo-qt` to display weather info in i3bar.
+exec --no-startup-id meteo-qt
+
 # we use nitrogen for wallpaper management.
 # autostart nitrogen for the wallpaper.
-# we should make a command for a default wallpaper.
+# ( NOTE: we should make a command for a default wallpaper.)
 exec --no-startup-id nitrogen --restore
 
 # we use Flameshot for easily taking screenshots from the panel.
@@ -89,8 +92,8 @@ floating_modifier $mod
 
 # start a terminal.
 # Our three installed terminal emulators are "xterm", "kitty" and "alacritty." Each are lightweight.
-bindsym $mod+Return exec kitty
-#bindsym $mod+Return exec alacritty
+#bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 #bindsym $mod+Return exec xterm
 
 # kill focused window
