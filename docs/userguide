@@ -202,7 +202,8 @@ Floating windows are always on top of tiling windows.
 Since i3 4.21, it's possible to drag tiling containers using the mouse. The
 drag can be initiated either by dragging the window's titlebar or by pressing
 the <<floating_modifier>> and dragging the container while holding the
-left-click button.
+left-click button. See the <<config_tiling_drag>> option for configuring which
+action triggers the tiling drag.
 
 Once the drag is initiated and the cursor has left the original container, drop
 indicators are created according to the position of the cursor relatively to
@@ -511,8 +512,8 @@ your bindings in the same physical location on the keyboard, use keycodes.
 If you don’t switch layouts, and want a clean and simple config file, use
 keysyms.
 
-Some tools (such as +import+ or +xdotool+) might be unable to run upon a
-KeyPress event, because the keyboard/pointer is still grabbed. For these
+Some tools (such as +xdotool+) might be unable to run upon a
+KeyPress event, because the keyboard is still grabbed. For these
 situations, the +--release+ flag can be used, which will execute the command
 after the keys have been released.
 
@@ -742,8 +743,11 @@ This option determines which border style *new* windows will have.  The default 
 +normal+. Note that default_floating_border applies only to windows which are starting out as
 floating windows, e.g., dialog windows, but not windows that are floated later on.
 
-Setting border style to +pixel+ eliminates title bars. The border style +normal+ allows you to
-adjust edge border width while keeping your title bar.
+Setting border style to +pixel+ eliminates title bars in split layouts. The border style
++normal+ allows you to adjust edge border width while keeping your title bar.
+
+The title bar is always visible in stacking and tabbed layouts, and this cannot be changed
+through configuration.
 
 *Syntax*:
 ---------------------------------------------
@@ -788,6 +792,10 @@ The "smart_no_gaps" setting hides edge-specific borders of a container if the
 container is the only container on its workspace and the gaps to the screen edge
 are +0+.
 
+[[_smart_borders]]
++hide_edge_borders+ has replaced the old +smart_borders+ syntax. Use the former
+instead of the latter.
+
 *Syntax*:
 -----------------------------------------------
 hide_edge_borders none|vertical|horizontal|both|smart|smart_no_gaps
@@ -796,27 +804,6 @@ hide_edge_borders none|vertical|horizontal|both|smart|smart_no_gaps
 *Example*:
 ----------------------
 hide_edge_borders vertical
-----------------------
-
-[[_smart_borders]]
-=== Smart borders
-
-Smart borders will draw borders on windows only if there is more than one window
-in a workspace. This feature can also be enabled only if the gap size between
-window and screen edge is +0+.
-
-*Syntax*:
------------------------------------------------
-smart_borders on|off|no_gaps
------------------------------------------------
-
-*Example*:
-----------------------
-# Activate smart borders (always)
-smart_borders on
-
-# Activate smart borders (only when there are effectively no gaps)
-smart_borders no_gaps
 ----------------------
 
 [[for_window]]
@@ -1437,6 +1424,8 @@ bindsym Mod1+F fullscreen toggle
 === Tiling drag
 
 You can configure how to initiate the tiling drag feature (see <<tiling_drag>>).
+
+The default is +modifier+.
 
 *Syntax*:
 --------------------------------
@@ -2197,6 +2186,10 @@ bindsym $mod+x [class="(?i)firefox"] kill
 
 # kill only the About dialog from Firefox
 bindsym $mod+x [class="Firefox" window_role="About"] kill
+
+# kill all windows except for Firefox and Gnome Terminal.
+# case-insensitive and uses negative lookaheads, supported by PCRE
+bindsym $mod+x [class="^(?i)(?!firefox)(?!gnome-terminal).*"] kill
 
 # enable floating mode and move container to workspace 4
 for_window [class="^evil-app$"] floating enable, move container to workspace 4

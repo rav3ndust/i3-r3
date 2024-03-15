@@ -112,8 +112,9 @@ static int outputs_string_cb(void *params_, const unsigned char *val, size_t len
         errno = 0;
         long parsed_num = strtol(copy, &end, 10);
         if (errno == 0 &&
-            (end && *end == '\0'))
+            (end && *end == '\0')) {
             params->outputs_walk->ws = parsed_num;
+        }
 
         FREE(copy);
         FREE(params->cur_key);
@@ -146,7 +147,6 @@ static int outputs_start_map_cb(void *params_) {
         new_output->visible = false;
         new_output->ws = 0,
         new_output->statusline_width = 0;
-        new_output->statusline_short_text = false;
         memset(&new_output->rect, 0, sizeof(rect));
         memset(&new_output->bar, 0, sizeof(surface_t));
         memset(&new_output->buffer, 0, sizeof(surface_t));

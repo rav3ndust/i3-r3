@@ -11,7 +11,7 @@
 # • https://build.i3wm.org/docs/ipc.html
 #   (or docs/ipc)
 #
-# • http://onyxneon.com/books/modern_perl/modern_perl_a4.pdf
+# • https://i3wm.org/downloads/modern_perl_a4.pdf
 #   (unless you are already familiar with Perl)
 #
 # Tests for setting and removing the _NET_WM_STATE_HIDDEN atom properly.
@@ -20,29 +20,8 @@ use i3test;
 use X11::XCB qw(:all);
 
 sub is_hidden {
-    sync_with_i3;
-    my $atom = $x->atom(name => '_NET_WM_STATE_HIDDEN');
-
     my ($con) = @_;
-    my $cookie = $x->get_property(
-        0,
-        $con->{id},
-        $x->atom(name => '_NET_WM_STATE')->id,
-        GET_PROPERTY_TYPE_ANY,
-        0,
-        4096
-    );
-
-    my $reply = $x->get_property_reply($cookie->{sequence});
-    my $len = $reply->{length};
-    return 0 if $len == 0;
-
-    my @atoms = unpack("L$len", $reply->{value});
-    for (my $i = 0; $i < $len; $i++) {
-        return 1 if $atoms[$i] == $atom->id;
-    }
-
-    return 0;
+    return net_wm_state_contains($con, '_NET_WM_STATE_HIDDEN');
 }
 
 my ($tabA, $tabB, $tabC, $subtabA, $subtabB, $windowA, $windowB);

@@ -241,6 +241,7 @@ static void move_to_output_directed(Con *con, direction_t direction) {
         con_focus(con);
         focused = old_ws;
         workspace_show(ws);
+        con_focus(con);
     }
 
     /* force re-painting the indicators */
@@ -354,8 +355,9 @@ void tree_move(Con *con, direction_t direction) {
     /* This is the container *above* 'con' (an ancestor of con) which is inside
      * 'same_orientation' */
     Con *above = con;
-    while (above->parent != same_orientation)
+    while (above->parent != same_orientation) {
         above = above->parent;
+    }
 
     /* Enforce the fullscreen focus restrictions. */
     if (!con_fullscreen_permits_focusing(above->parent)) {

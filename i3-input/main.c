@@ -163,29 +163,32 @@ static void finish_input(void) {
     char *command = (char *)concat_strings(glyphs_utf8, input_position);
 
     /* count the occurrences of %s in the string */
-    int c;
-    int len = strlen(format);
-    int cnt = 0;
-    for (c = 0; c < (len - 1); c++)
-        if (format[c] == '%' && format[c + 1] == 's')
+    const size_t len = strlen(format);
+    size_t cnt = 0;
+    for (size_t c = 0; c < (len - 1); c++) {
+        if (format[c] == '%' && format[c + 1] == 's') {
             cnt++;
-    printf("occurrences = %d\n", cnt);
+        }
+    }
+    printf("occurrences = %ld\n", cnt);
 
     /* allocate space for the output */
-    int inputlen = strlen(command);
-    char *full = scalloc(strlen(format) - (2 * cnt) /* format without all %s */
-                             + (inputlen * cnt)     /* replaced %s */
-                             + 1,                   /* trailing NUL */
-                         1);
+    const size_t input_len = strlen(command);
+    const size_t full_len = MAX(input_len,                 /* avoid compiler warning */
+                                strlen(format) - (2 * cnt) /* format without all %s */
+                                    + (input_len * cnt)    /* replaced %s */
+                                    + 1                    /* trailing NUL */
+    );
+    char *full = scalloc(full_len, 1);
     char *dest = full;
-    for (c = 0; c < len; c++) {
-        /* if this is not % or it is % but without a following 's',
-         * just copy the character */
-        if (format[c] != '%' || (c == (len - 1)) || format[c + 1] != 's')
+    for (size_t c = 0; c < len; c++) {
+        /* if this is not % or it is % but without a following 's', just copy
+         * the character */
+        if (format[c] != '%' || (c == (len - 1)) || format[c + 1] != 's') {
             *(dest++) = format[c];
-        else {
-            strncat(dest, command, inputlen);
-            dest += inputlen;
+        } else {
+            strncat(dest, command, input_len);
+            dest += input_len;
             /* skip the following 's' of '%s' */
             c++;
         }
@@ -223,8 +226,9 @@ static int handle_key_press(void *ignored, xcb_connection_t *conn, xcb_key_press
 
     /* If modeswitch is currently active, we need to look in group 2 or 3,
      * respectively. */
-    if (modeswitch_active)
+    if (modeswitch_active) {
         col += 2;
+    }
 
     xcb_keysym_t sym = xcb_key_press_lookup_keysym(symbols, event, col);
     if (sym == XK_Mode_switch) {
@@ -233,12 +237,14 @@ static int handle_key_press(void *ignored, xcb_connection_t *conn, xcb_key_press
         return 1;
     }
 
-    if (sym == XK_Return)
+    if (sym == XK_Return) {
         finish_input();
+    }
 
     if (sym == XK_BackSpace) {
-        if (input_position == 0)
+        if (input_position == 0) {
             return 1;
+        }
 
         input_position--;
         free(glyphs_utf8[input_position]);
@@ -259,8 +265,9 @@ static int handle_key_press(void *ignored, xcb_connection_t *conn, xcb_key_press
     printf("xcb_is_misc_function_key = %d\n", xcb_is_misc_function_key(sym));
     printf("xcb_is_modifier_key = %d\n", xcb_is_modifier_key(sym));
 
-    if (xcb_is_modifier_key(sym) || xcb_is_cursor_key(sym))
+    if (xcb_is_modifier_key(sym) || xcb_is_cursor_key(sym)) {
         return 1;
+    }
 
     printf("sym = %c (%d)\n", sym, sym);
 
@@ -284,8 +291,9 @@ static int handle_key_press(void *ignored, xcb_connection_t *conn, xcb_key_press
     glyphs_utf8[input_position] = out;
     input_position++;
 
-    if (input_position == limit)
+    if (input_position == limit) {
         finish_input();
+    }
 
     handle_expose(NULL, conn, NULL);
     return 1;
@@ -439,8 +447,9 @@ int main(int argc, char *argv[]) {
 
     int screen;
     conn = xcb_connect(NULL, &screen);
-    if (!conn || xcb_connection_has_error(conn))
+    if (!conn || xcb_connection_has_error(conn)) {
         die("Cannot open display");
+    }
 
     sockfd = ipc_connect(socket_path);
 
@@ -453,8 +462,9 @@ int main(int argc, char *argv[]) {
     font = load_font(pattern ? pattern : "pango:monospace 8", true);
     set_font(&font);
 
-    if (prompt != NULL)
+    if (prompt != NULL) {
         prompt_offset = predict_text_width(prompt);
+    }
 
     const xcb_rectangle_t win_pos = get_window_position();
 
