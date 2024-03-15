@@ -245,11 +245,6 @@ bar {
     	status_command i3status
 }
 
-# bar {
-#	position top
-#	status_command i3blocks ~/etc/i3r3blocks.conf
-#}
-
 # custom conky displaying time, a message, and date in US format:
 exec --no-startup-id conky
 
