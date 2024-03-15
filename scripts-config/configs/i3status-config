@@ -26,8 +26,8 @@ wireless _first_ {
 }
 
 ethernet _first_ {
-        format_up = "LAN: connected"
-        format_down = "LAN: down"
+        format_up = "ethernet: connected"
+        format_down = "ethernet: down"
 }
 
 battery all {
@@ -49,5 +49,5 @@ battery all {
 #}
 
 tztime local {
-        format = "%a, %b %d %Y | %l:%M:%S %P  "
+        format = "%a, %b %d %Y | %l:%M %P  "
 }
