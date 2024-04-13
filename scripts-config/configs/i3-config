@@ -16,21 +16,23 @@ set $mod Mod4
 #for_window [class="[.]*"] floating enable
 
 # for window title bars
-for_window [class="^.*"] border pixel 2 
+for_window [class="^.*"] border pixel 2
 
 # for gaps
 #####################################
-# - - smart gaps.
-smart_gaps on 
+# - - smart gaps/borders.
+smart_gaps on
 smart_borders on
 # - - manual gaps.
-# You can manually adjust their values below.
-#gaps inner 5
-#gaps outer 5 
+# You can manually adjust their values below, if you choose to set them.
+gaps inner 7
+#gaps outer 5
+
+#for_window [class=".*"] border pixel 2 gaps inner 50 gaps outer 20
 
 # for border colors
 # the final hex code is window border. currently = Neon Pink (#FF10F0)
-client.focused #555555 #555555 #ffffff #2e9ef4    #FF10F0 
+client.focused #555555 #555555 #ffffff #2e9ef4    #FF10F0
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -45,7 +47,7 @@ font pango:monospace 8
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy --nofork
 
 # volumeicon provides us a simple, GUI way to control volume with mouse
 # (volumeicon on arch/ubuntu/deb.)
@@ -66,13 +68,15 @@ exec --no-startup-id blueman-applet
 # make sure it starts on launch, because apps that rely on notifications might hang.
 exec --no-startup-id dunst
 
-# we use `meteo-qt` to display weather info in i3bar.
-exec --no-startup-id meteo-qt
-
 # we use nitrogen for wallpaper management.
 # autostart nitrogen for the wallpaper.
-# ( NOTE: we should make a command for a default wallpaper.)
+# we should make a command for a default wallpaper.
 exec --no-startup-id nitrogen --restore
+
+# we use `meteo-qt` for keeping tabs on the weather.
+# it displays a small widget showing weather in the panel.
+# you can click the widget to pop out a window with forecast.
+exec --no-startup-id meteo-qt
 
 # we use Flameshot for easily taking screenshots from the panel.
 exec --no-startup-id flameshot
@@ -106,7 +110,7 @@ bindsym $mod+d exec dmenu_run -nb black -nf purple -sb green -sf red -l 15 -p "n
 # installed.
 bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -nb black -nf purple -sb green -sf red -l 10 -p "nightshade - Applications List: "'
 
-#optional alternative: 
+#optional alternative:
 # i3-dmenu-desktop (rofi)...
 #bindsym $mod+Shift+a exec --no-startup-id "i3-dmenu-desktop --dmenu='rofi -dmenu'"
 
@@ -200,6 +204,7 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+bindsym $mod+Shift+z exec "i3lock-fancy"
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -240,20 +245,17 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-	# uncomment the below if we want i3bar on top.
-	position top
-    	status_command i3status
+        # uncomment the below if we want i3bar on top.
+        position top
+        status_command i3status
+        font pango:Ubuntu 10
 }
 
 # custom conky displaying time, a message, and date in US format:
 exec --no-startup-id conky
 
-# we're using xautolock+i3lock to lock the screen after 10 mins of inactivity. The screen will turn purple and you'll be prompted for your password.
+# we're using xautolock+i3lock to lock the screen after 10 mins of inactivity. The screen will blank and you'll be prompted for your password.
 # you can change the lock time by editing the number behind the -time flag. You can also edit the color of the lock screen using hexadecimal. Right now, it is set to purple (6a0dad)
-exec "xautolock -detectsleep -time 10 -locker \"i3 lock -c 6a0dad --show-failed-attempts\""
-
+#exec "xautolock -detectsleep -time 10 -locker \"i3 lock -c 6a0dad --show-failed-attempts\""
 # We're using xscreensaver to handle screensaving and autolock.
-exec --no-startup-id xscreensaver
-
-# we want to start the gnome-keyring-daemon so we can store secrets for browsers and other applications.
-exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+#exec --no-startup-id xscreensaver
