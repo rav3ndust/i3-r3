@@ -9,12 +9,13 @@
 general {
         colors = true
         interval = 5
+	markup = "pango" 
 }
 
 #order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
-#order += "battery all"
+order += "battery all"
 #order += "disk /"
 #order += "load"
 #order += "memory"
@@ -31,7 +32,8 @@ ethernet _first_ {
 }
 
 battery all {
-        format = "Battery Power: %status %percentage %remaining"
+        #format = "🔋 %status %percentage %remaining"
+	format = " <span color='#ff10f0'>%percentage</span> " 
 }
 
 #disk "/" {
@@ -49,5 +51,5 @@ battery all {
 #}
 
 tztime local {
-        format = "%a, %b %d %Y | %l:%M %P  "
+        format = "<span color='#ff9cce'>%a, %b %d %Y | %l:%M %P</span>  "
 }
