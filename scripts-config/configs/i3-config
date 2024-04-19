@@ -248,7 +248,11 @@ bar {
 	# uncomment the below if we want i3bar on top.
 	position top
     	status_command i3status
+	# font choices we like - Ubuntu and Cantarell.
+	# both are nice and readable in wired.
+	# use the font of your choice by commenting/uncommenting them.
 	font pango:Ubuntu 11
+	#font pango:Cantarell 10
 }
 
 # custom conky displaying time, a message, and date in US format:
