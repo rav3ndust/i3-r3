@@ -119,6 +119,9 @@ bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -nb
 # launch rofi - autorun, ssh, app picker.
 bindsym $mod+Shift+d exec --no-startup-id "rofi -combi -modi window,drun,ssh -theme purple -font 'hack 10' -show combi"
 
+# add a shortcut for displaying recent notifications
+bindsym $mod+Shift+n exec --no-startup-id "dunstctl history-pop" 
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
