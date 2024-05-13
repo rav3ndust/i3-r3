@@ -57,16 +57,34 @@ A bunch of floating windows can become difficult to manage in the middle of a wo
 **wiredWM** also contains: 
 
 - custom **dmenu** and **rofi** configurations for running commands and launching applications.
-- a custom status bar via **polybar**. 
+- status bar giving you your connectivity stats, battery life, time and date, and handy applets for common utilities
 - my own custom scripts built on top of [suckless's](https://suckless.org) **surf** browser.
 - a custom **conky** config.
-- various other assorted things.
 - custom keyboard shortcuts for some of the scripts we've built in.
-- display compositing via **picom**. 
+- display compositing via **picom**.
+- ...various other assorted things!
+
+### handy quickstart!
+
+Here are some of the common **keyboard shortcuts** to keep in mind when starting out: 
+
+> Please note, the *Meta* key is also known as the *Windows* key!
+
+- **Meta+Enter**: Open a terminal.
+- **Meta+d**: Open `dmenu` to run a command.
+- **Meta+Shift+A**: Open Application List to launch an app. Reads from `.desktop` files.
+- **Meta+Shift+D**: Open `rofi` run launcher to filter open windows and run commands.
+- **Meta+Shift+Q**: Close the focused window.
+- **Meta+W**: Switch to **tabbed** windowing.
+- **Meta+S**: Switch to **stacked** windowing.
+- **Meta+E**: Switch to **tiled** windowing.
+- **Meta+Shift+R**: Restart the window manager in-place.
+- **Meta+Shift+Z**: Lock your screen. We use `i3lock-fancy` for this.
+- **Meta+Shift+E**: Log out of the session. 
 
 ### more 
 
-For more information about i3, please see [the project's website](https://i3wm.org/) and [online documentation](https://i3wm.org/docs/). I'll be updating docs for this fork soon. 
+For more information about i3, please see [the project's website](https://i3wm.org/) and [online documentation](https://i3wm.org/docs/). We'll be updating docs for wiredWM soon. 
 
 You're of course more than free to contribute to my fork, but if you want to check out more information about contributing to the OG i3, please see [CONTRIBUTING.md](.github/CONTRIBUTING.md). 
 
@@ -80,7 +98,6 @@ If you like **wiredWM** and feel some burning desire to help fund it, please dir
 
 Some of our other major components are: 
 
-- [polybar](https://github.com/polybar/polybar)
 - [rofi](https://github.com/davatorium/rofi)
 - [flameshot](https://github.com/flameshot-org/flameshot)
 - [nm-applet](https://github.com/pavlix/nm-applet)
