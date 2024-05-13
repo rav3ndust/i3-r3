@@ -80,6 +80,7 @@ Here are some of the common **keyboard shortcuts** to keep in mind when starting
 - **Meta+E**: Switch to **tiled** windowing.
 - **Meta+Shift+R**: Restart the window manager in-place.
 - **Meta+Shift+Z**: Lock your screen. We use `i3lock-fancy` for this.
+- **Meta+Shift+N**: Pops out your recent notifications.
 - **Meta+Shift+E**: Log out of the session. 
 
 ### more 
