@@ -51,5 +51,5 @@ battery all {
 #}
 
 tztime local {
-        format = "<span color='#ff9cce'>%a, %b %d %Y | %l:%M %P</span>  "
+        format = "<span color='#ff9cce'> %a, %b %d %Y   %l:%M %P</span>  "
 }
