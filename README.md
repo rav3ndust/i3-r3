@@ -44,7 +44,7 @@ For a general list of applications, you can also press *ctrl+Shift+a* and scroll
 
 ## organize your windows with ease
 
-![image](https://github.com/rav3ndust/wiredWM/assets/35274771/0db2a9ad-976c-4383-8272-29c19ebc4277)
+![image](https://github.com/rav3ndust/wiredWM/assets/35274771/40b3d828-78a1-4af7-be99-089c440a3b57)
 
 ###### automate the organization of the windows on your screen
 
