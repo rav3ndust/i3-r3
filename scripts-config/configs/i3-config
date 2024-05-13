@@ -21,7 +21,7 @@ for_window [class="^.*"] border pixel 2
 # for gaps
 #####################################
 # - - smart gaps/borders.
-smart_gaps on 
+smart_gaps on
 smart_borders on
 # - - manual gaps.
 # You can manually adjust their values below, if you choose to set them.
@@ -32,11 +32,13 @@ gaps inner 7
 
 # for border colors
 # the final hex code is window border. currently = Neon Pink (#FF10F0)
-client.focused #555555 #555555 #ffffff #2e9ef4    #FF10F0 
-
+client.focused 		#ff10f0   #000000    #39FF14  #39FF14  #FF10F0 
+client.unfocused 	#000000   #000000    #ff3131
+#              		border   background   text     indic   child_border
+##############################################################################   
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:Cantarell 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -253,6 +255,12 @@ bar {
 	# use the font of your choice by commenting/uncommenting them.
 	#font pango:Ubuntu 11
 	font pango:Cantarell 10
+	colors {
+		focused_workspace #ff10f0 #000000 #39FF14
+		inactive_workspace #000000 #000000 #ff3131
+		separator #ff10f0
+		statusline #ff10f0 
+	}
 }
 
 # custom conky displaying time, a message, and date in US format:
