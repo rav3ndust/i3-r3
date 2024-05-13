@@ -5,7 +5,7 @@
 
 **wiredWM** is rav3ndust's personal fork of i3, which is a tiling window manager for X11. There is also work ongoing to bring the configs over to Sway, for Wayland.
 
-![image](https://github.com/rav3ndust/wiredWM/assets/35274771/93f7b471-6b64-4f0d-b542-def097533ffe)
+![image](https://github.com/rav3ndust/wiredWM/assets/35274771/606fd9ee-4924-4d64-96f0-1de99bf3de87)
 
 ###### let's all love lain
 
@@ -13,7 +13,8 @@
 
 ## minimal and lightweight 
 
-![image](https://user-images.githubusercontent.com/35274771/189591225-95261511-a82a-4586-9af0-bf4250f1f8cd.png)
+![image](https://github.com/rav3ndust/wiredWM/assets/35274771/a1229952-062f-4f6e-8eb9-02e08712c081)
+
 
 ###### minimal desktop and keyboard-driven for quick efficiency. clickable icons are located at the right side of the status bar for common tasks - for those unfortunate occasions where you have to reach for the mouse
 
@@ -24,12 +25,14 @@ Easy to use and easily extensible. Takes up very little of precious system resou
 - Screenshot utility (handles via `flameshot`.)
 - Network/Wi-Fi manager (handles via `nm-applet`.)
 - Volume Control (handles via `volumeicon`) 
-
+- Weather (handles via `meteo-qt`)
+- Bluetooth Manager (handles via `blueman`)
+  
 =====
 
 ## more resources for your stuff
 
-![image](https://user-images.githubusercontent.com/35274771/189590616-299a60d1-7add-4bde-805a-891a2c4e0ddd.png)
+![image](https://github.com/rav3ndust/wiredWM/assets/35274771/1100995d-363f-45e6-8b45-a4f084d983d7)
 
 ###### browse the web and run all of your favorite applications in a minimal environment 
 
@@ -41,7 +44,7 @@ For a general list of applications, you can also press *ctrl+Shift+a* and scroll
 
 ## organize your windows with ease
 
-![image](https://user-images.githubusercontent.com/35274771/189590507-5ea54571-21a8-4a4a-956f-b50a589c2303.png)
+![image](https://github.com/rav3ndust/wiredWM/assets/35274771/0db2a9ad-976c-4383-8272-29c19ebc4277)
 
 ###### automate the organization of the windows on your screen
 
