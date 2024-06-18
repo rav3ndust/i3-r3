@@ -89,7 +89,7 @@ For more information about i3, please see [the project's website](https://i3wm.o
 
 You're of course more than free to contribute to my fork, but if you want to check out more information about contributing to the OG i3, please see [CONTRIBUTING.md](.github/CONTRIBUTING.md). 
 
-If you like **wiredWM** and feel some burning desire to help fund it, please direct your contributions towards the parent project, **i3**. WIthout it, this project would not be able to exist! 
+If you like **wiredWM** and feel some burning desire to help fund it, please direct your contributions towards the parent project, **i3**. Without it, this project would not be able to exist! 
 
 *close the world, enter the nExt* ;)
 
