@@ -579,6 +579,8 @@ CFGFUN(popup_during_fullscreen, const char *value) {
         config.popup_during_fullscreen = PDF_IGNORE;
     } else if (strcmp(value, "leave_fullscreen") == 0) {
         config.popup_during_fullscreen = PDF_LEAVE_FULLSCREEN;
+    } else if (strcmp(value, "all") == 0) {
+        config.popup_during_fullscreen = PDF_ALL;
     } else {
         config.popup_during_fullscreen = PDF_SMART;
     }

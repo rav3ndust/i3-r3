@@ -202,12 +202,14 @@ $config = <<'EOT';
 popup_during_fullscreen ignore
 popup_during_fullscreen leave_fullscreen
 popup_during_fullscreen SMArt
+popup_during_fullscreen aLL
 EOT
 
 $expected = <<'EOT';
 cfg_popup_during_fullscreen(ignore)
 cfg_popup_during_fullscreen(leave_fullscreen)
 cfg_popup_during_fullscreen(smart)
+cfg_popup_during_fullscreen(all)
 EOT
 
 is(parser_calls($config),

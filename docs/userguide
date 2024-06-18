@@ -1229,19 +1229,21 @@ mouse_warping none
 When you are in fullscreen mode, some applications still open popup windows
 (take Xpdf for example). This is because these applications might not be aware
 that they are in fullscreen mode (they do not check the corresponding hint).
-There are three things which are possible to do in this situation:
+i3 supports four options for this situation:
 
-1. Display the popup if it belongs to the fullscreen application only. This is
-   the default and should be reasonable behavior for most users.
-2. Just ignore the popup (don’t map it). This won’t interrupt you while you are
-   in fullscreen. However, some apps might react badly to this (deadlock until
-   you go out of fullscreen).
-3. Leave fullscreen mode.
+1. +smart+: Display the popup if it belongs to the fullscreen application only.
+   This is the default and should be reasonable behavior for most users.
+2. +ignore+: Just ignore the popup (don’t map it). This won’t interrupt you
+   while you are in fullscreen. However, some apps might react badly to this
+   (deadlock until you go out of fullscreen).
+3. +leave_fullscreen+: Leave fullscreen mode.
+4. +all+: Since i3 4.24: Display all floating windows regardless to which
+   application they belong to.
 
 *Syntax*:
------------------------------------------------------
-popup_during_fullscreen smart|ignore|leave_fullscreen
------------------------------------------------------
+---------------------------------------------------------
+popup_during_fullscreen smart|ignore|leave_fullscreen|all
+---------------------------------------------------------
 
 *Example*:
 ------------------------------
@@ -2472,7 +2474,7 @@ bindsym $mod+u focus parent
 bindsym $mod+g focus mode_toggle
 
 # Focus the next output (effectively toggles when you only have two outputs)
-bindsym $mod+x move workspace to output next
+bindsym $mod+x focus output next
 
 # Focus the output right to the current one
 bindsym $mod+x focus output right

@@ -366,7 +366,7 @@ state RESTART_STATE:
 
 # popup_during_fullscreen
 state POPUP_DURING_FULLSCREEN:
-  value = 'ignore', 'leave_fullscreen', 'smart'
+  value = 'ignore', 'leave_fullscreen', 'all', 'smart'
       -> call cfg_popup_during_fullscreen($value)
 
 state TILING_DRAG_MODE:

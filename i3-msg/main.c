@@ -148,11 +148,6 @@ static yajl_callbacks config_callbacks = {
 };
 
 int main(int argc, char *argv[]) {
-#if defined(__OpenBSD__)
-    if (pledge("stdio rpath unix", NULL) == -1) {
-        err(EXIT_FAILURE, "pledge");
-    }
-#endif
     char *socket_path = NULL;
     int o, option_index = 0;
     uint32_t message_type = I3_IPC_MESSAGE_TYPE_RUN_COMMAND;
