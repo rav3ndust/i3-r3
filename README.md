@@ -68,7 +68,7 @@ A bunch of floating windows can become difficult to manage in the middle of a wo
 
 Here are some of the common **keyboard shortcuts** to keep in mind when starting out: 
 
-> Please note, the *Meta* key is also known as the *Windows* key!
+> Please note, the *Meta* key is also known as the *Windows* key. On Apple keyboards, the *Meta* key is the *command* key.
 
 - **Meta+Enter**: Open a terminal.
 - **Meta+d**: Open `dmenu` to run a command.
