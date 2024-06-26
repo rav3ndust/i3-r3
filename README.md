@@ -81,6 +81,7 @@ Here are some of the common **keyboard shortcuts** to keep in mind when starting
 - **Meta+Shift+R**: Restart the window manager in-place.
 - **Meta+Shift+Z**: Lock your screen. We use `i3lock-fancy` for this.
 - **Meta+Shift+N**: Pops out your recent notifications.
+- **Meta+C**: Pops out a calendar window. We use `gsimplecal` for this.
 - **Meta+Shift+E**: Log out of the session. 
 
 ### more 
@@ -102,4 +103,6 @@ Some of our other major components are:
 - [rofi](https://github.com/davatorium/rofi)
 - [flameshot](https://github.com/flameshot-org/flameshot)
 - [nm-applet](https://github.com/pavlix/nm-applet)
+- [meteo-qt](https://github.com/dglent/meteo-qt)
+- [gsimplecal](https://github.com/dmedvinsky/gsimplecal)
 - various components from [suckless](https://suckless.org).
