@@ -122,6 +122,9 @@ bindsym $mod+Shift+d exec --no-startup-id "rofi -combi -modi window,drun,ssh -th
 # add a shortcut for displaying recent notifications
 bindsym $mod+Shift+n exec --no-startup-id "dunstctl history-pop" 
 
+# add a shortcut for popping the calendar
+bindsym $mod+c exec --no-startup-id "gsimplecal"
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
