@@ -71,7 +71,7 @@ Here are some of the common **keyboard shortcuts** to keep in mind when starting
 > Please note, the *Meta* key is also known as the *Windows* key. On Apple keyboards, the *Meta* key is the *command* key.
 
 - **Meta+Enter**: Open a terminal.
-- **Meta+d**: Open `dmenu` to run a command.
+- **Meta+D**: Open `dmenu` to run a command.
 - **Meta+Shift+A**: Open Application List to launch an app. Reads from `.desktop` files.
 - **Meta+Shift+D**: Open `rofi` run launcher to filter open windows and run commands.
 - **Meta+Shift+Q**: Close the focused window.
