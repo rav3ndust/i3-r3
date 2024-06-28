@@ -36,9 +36,9 @@ Easy to use and easily extensible. Takes up very little of precious system resou
 
 ###### browse the web and run all of your favorite applications in a minimal environment 
 
-Just open up the **nightshade launcher** by pressing *crtl+d* - that launches a custom **dmenu** script, and you can search for and launch your applications with ease. Think of it as your miniature Start panel.
+Just open up the **nightshade launcher** by pressing *Meta+D* - that launches a custom **dmenu** script, and you can search for and launch your applications with ease. Think of it as your miniature Start panel.
 
-For a general list of applications, you can also press *ctrl+Shift+a* and scroll through to select one. Anything that has a desktop entry will appear here. 
+For a general list of applications, you can also press *Meta+Shift+A* and scroll through to select one. Anything that has a desktop entry will appear here. 
 
 =====
 
