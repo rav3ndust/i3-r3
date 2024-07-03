@@ -280,3 +280,10 @@ exec --no-startup-id conky
 
 # we want to start the gnome-keyring-daemon so we can store secrets for browsers and other applications.
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+
+# ensure proper kb layout
+exec "setxkbmap -layout us,de"
+
+# XXX: Special Section For Local Machine
+# You can use this section for special commands you might need to run on your local machine without affecting the rest of the config.
+# For uniformity, please don't commit anything below this line to the public repo.
