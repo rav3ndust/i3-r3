@@ -16,7 +16,7 @@ set $mod Mod4
 #for_window [class="[.]*"] floating enable
 
 # for window title bars
-for_window [class="^.*"] border pixel 2 
+for_window [class="^.*"] border pixel 3 
 
 # for gaps
 #####################################
@@ -283,6 +283,11 @@ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
 
 # ensure proper kb layout
 exec "setxkbmap -layout us,de"
+###########################################################
+# XXX  - - - Sway-specific Things - - - 
+# These are items that are specific to Sway. Keep them separate from i3-specific things to avoid confusion.
+###########################################################
+default_border pixel 3
 
 # XXX: 	- - - Special Section For Local Machine - - - 
 # You can use this section for special commands you might need to run on your local machine without affecting the rest of the config.
