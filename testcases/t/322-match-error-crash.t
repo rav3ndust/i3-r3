@@ -14,24 +14,20 @@
 # • https://i3wm.org/downloads/modern_perl_a4.pdf
 #   (unless you are already familiar with Perl)
 #
-# Verifies that reloading the config reverts to the default
-# binding mode.
-# Ticket: #2228
-# Bug still in: 4.11-262-geb631ce
+# Verify i3 does not crash when reloading configuration with invalid match
+# criteria.
+# Ticket: #6141
+# Bug still in: 4.23-47-gbe840af4
 use i3test i3_config => <<EOT;
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-
-mode "othermode" {
-}
+assign [class="class" window_type="some_type"] workspace 1
+assign [class="class" window_type="some_type"] output 1
+for_window [class="class" window_type="some_type"] workspace 1
+no_focus [class="class" window_type="some_type"] workspace 1
 EOT
 
-cmd 'mode othermode';
+does_i3_live;
 
-my @events = events_for(
-    sub { cmd 'reload' },
-    'mode');
-
-is(scalar @events, 1, 'Received 1 event');
-is($events[0]->{change}, 'default', 'change is "default"');
+cmd 'reload';
+does_i3_live;
 
 done_testing;

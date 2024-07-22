@@ -233,6 +233,7 @@ bool load_configuration(const char *override_configpath, config_load_t load_type
     config.focus_wrapping = FOCUS_WRAPPING_ON;
 
     config.tiling_drag = TILING_DRAG_MODIFIER;
+    config.swap_modifier = XCB_KEY_BUT_MASK_SHIFT;
 
     FREE(current_configpath);
     current_configpath = get_config_path(override_configpath, true);
@@ -266,7 +267,6 @@ bool load_configuration(const char *override_configpath, config_load_t load_type
     memset(&stack, '\0', sizeof(struct stack));
     struct parser_ctx ctx = {
         .use_nagbar = (load_type != C_VALIDATE),
-        .assume_v4 = false,
         .stack = &stack,
     };
     SLIST_INIT(&(ctx.variables));
