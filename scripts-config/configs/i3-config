@@ -88,6 +88,9 @@ exec --no-startup-id flameshot
 # we use lxpolkit to handle priv escalation when needed.
 exec --no-startup-id lxpolkit
 
+# start compositor, we use xcompmgr
+exec --no-startup-id xcompmgr
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
