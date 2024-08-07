@@ -39,8 +39,9 @@ client.unfocused 	#000000   #000000    #ff3131
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:Ubuntu 10
-font pango:Cantarell 10
+#font pango:Cantarell 10
 #font pango:Inter 10
+font pango:Quicksand 10
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
