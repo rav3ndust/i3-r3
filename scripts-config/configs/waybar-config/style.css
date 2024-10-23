@@ -1,0 +1,92 @@
+/*  nightshadeNeon theme
+      - by rav3ndust
+  Default theme found in wiredWM. */
+* {
+    font-size: 10px; /* Font size for better readability */
+    font-family: Quicksand;
+    font-weight: bold; /* Make all text bold */
+}
+
+window#waybar {
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    color: #fdf6e3;
+}
+
+#custom-right-arrow-dark,
+#custom-left-arrow-dark {
+    color: #1a1a1a;
+}
+#custom-right-arrow-light,
+#custom-left-arrow-light {
+    color: #292b2e;
+    background: #1a1a1a;
+}
+
+#workspaces,
+#clock,
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#disk,
+#tray {
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    border-radius: 15px; /* Rounded corners for pill effect */
+    padding: 3px 8px; /* Padding for a comfortable look */
+    margin: 0 3px; /* Margin between modules */
+    color: #fdf6e3; /* Default text color */
+    font-size: 10px; /* Ensure text size is consistent */
+}
+
+#workspaces {
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1); /* Subtle inner shadow for depth */
+}
+
+#workspaces button {
+    padding: 3px 8px; /* Padding for buttons */
+    color: #fdf6e3; /* Default text color */
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for buttons */
+    border-radius: 15px; /* Rounded corners for pill effect */
+    transition: background 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+}
+
+#workspaces button.focused {
+    color: #ff10f0; /* Primary color for active workspace */
+    border: 2px solid #39ff14; /* Secondary color for active workspace border */
+}
+
+#workspaces button:hover {
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); /* Subtle glow effect on hover */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Optional: text shadow for depth */
+}
+
+#workspaces button.inactive {
+    background: red; /* Inactive workspace background */
+    color: black; /* Inactive workspace text color */
+}
+
+#pulseaudio {
+    color: #ff10f0; /* Match main color scheme */
+}
+
+#memory {
+    color: #39ff14; /* Match main color scheme */
+}
+
+#cpu {
+    color: #000000; /* Match main color scheme */
+}
+
+#battery {
+    color: #ff10f0; /* Match main color scheme */
+}
+
+#disk {
+    color: #39ff14; /* Match main color scheme */
+}
+
+#clock,
+#clock * { /* Target the clock and all its child elements */
+    color: #39ff14; /* Set clock color to #39ff14 */
+    font-weight: bold; /* Make clock text bold */
+}
