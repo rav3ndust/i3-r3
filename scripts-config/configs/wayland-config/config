@@ -1,6 +1,5 @@
 // -*- mode: json -*-
 // waybar config for wiredWM
-// it is stored in /etc/xdg/waybar/config
 {
 	"layer": "top",
 	"position": "top",
@@ -30,15 +29,18 @@
 
 	"clock#1": {
 		"format": "{:%a}",
-		"tooltip": false
+		"tooltip": false,
+		"on-click": "gsimplecal"
 	},
 	"clock#2": {
 		"format": "{:%H:%M}",
-		"tooltip": false
+		"tooltip": false,
+		"on-click": "st -e tty-clock"
 	},
 	"clock#3": {
 		"format": "{:%m-%d}",
-		"tooltip": false
+		"tooltip": true,
+		"on-click": "gsimplecal"
 	},
 
 	"pulseaudio": {
