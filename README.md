@@ -99,7 +99,7 @@ Some of our other major components are:
 - [gsimplecal](https://github.com/dmedvinsky/gsimplecal)
 - various components from [suckless](https://suckless.org).
 
-### wayland sneak peek
+### are we wayland yet?
 
 ![image](https://github.com/user-attachments/assets/7705fe4c-f98a-4919-8853-0ca072bee4ad)
 
