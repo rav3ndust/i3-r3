@@ -98,3 +98,26 @@ Some of our other major components are:
 - [meteo-qt](https://github.com/dglent/meteo-qt)
 - [gsimplecal](https://github.com/dmedvinsky/gsimplecal)
 - various components from [suckless](https://suckless.org).
+
+### wayland sneak peek
+
+![image](https://github.com/user-attachments/assets/7705fe4c-f98a-4919-8853-0ca072bee4ad)
+
+As mentioned above, work has been going on to move our configs over to Sway, for Wayland. 
+
+I want to make sure everything works as flawlessly on the Wayland version of wiredWM as it does for the x11 version, so I am keeping the two repositories separate. I have been messing around with this lately, and the Wayland version of our configs are finally becoming my daily driver.
+
+ To that end, I will have a different repo for the Wayland version of wiredWM, so that anyone can easily grab the x11 or wayland version, whichever they prefer based on their needs.
+
+![image](https://github.com/user-attachments/assets/5a8b7617-8e0a-42a8-ad2f-0b825f3202b6)
+
+We're using `waybar` in place of `polybar` in our Wayland configuration.
+
+I've put a lot of work into our `waybar` config. It has clickable modules, custom styling following our 'nightshadeNeon' color scheme, and a systray.
+
+![image](https://github.com/user-attachments/assets/13aa24e2-13b7-43c9-9165-2d7738f3e42e)
+
+We want it to be 1:1 with the x11 version, so when I'm comfy with using it as my daily driver for awhile, I'll have a new repo up and linked here! The repo you're currently in, of course, will not be going anywhere. The x11 version is going to be being kept around for a long time to come.
+
+![image](https://github.com/user-attachments/assets/f008331a-554a-4cf7-b61a-906a23cfe213)
+
