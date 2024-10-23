@@ -1,5 +1,6 @@
 // -*- mode: json -*-
-
+// waybar config for wiredWM
+// it is stored in /etc/xdg/waybar/config
 {
 	"layer": "top",
 	"position": "top",
