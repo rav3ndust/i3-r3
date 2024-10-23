@@ -115,9 +115,11 @@ We're using `waybar` in place of `polybar` in our Wayland configuration.
 
 I've put a lot of work into our `waybar` config. It has clickable modules, custom styling following our 'nightshadeNeon' color scheme, and a systray.
 
+`xdg-desktop-portal-wlr` is also included in the installation script, for apps that use portals.
+
 ![image](https://github.com/user-attachments/assets/13aa24e2-13b7-43c9-9165-2d7738f3e42e)
 
 We want it to be 1:1 with the x11 version, so when I'm comfy with using it as my daily driver for awhile, I'll have a new repo up and linked here! The repo you're currently in, of course, will not be going anywhere. The x11 version is going to be being kept around for a long time to come.
 
-![image](https://github.com/user-attachments/assets/f008331a-554a-4cf7-b61a-906a23cfe213)
+![image](https://github.com/user-attachments/assets/d8417ca3-10d5-4b1e-9645-956fbee058f1)
 
