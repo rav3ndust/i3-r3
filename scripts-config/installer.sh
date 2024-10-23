@@ -35,6 +35,7 @@
 # - we use *xscreensaver* for handling screensaver functionality and auto-locking.
 # - we use *xss-lock* for an additional screen locking utility to run i3lock-fancy.
 # - we use *meteo-qt* for displaying weather info in the i3bar.
+# - we also add *calcurse* for tracking appointments and `TODO`s in the terminal.
 ########################################################
 i3_CONFIG_1_LOCATION="/etc/i3/config"
 i3_CONFIG_2_LOCATION="$HOME/.config/i3/config"
@@ -66,7 +67,7 @@ makeFolders () {
 install_wired_pkgs () {	
 	# this function updates and intalls the needed deps for wiredWM
 	sudo apt-get update
-	sudo apt-get install -y i3 i3lock-fancy nitrogen pulseaudio-utils xterm arandr rofi xss-lock feh volumeicon-alsa polybar blueman flameshot meteo-qt pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit lxappearance vim nnn cmus xscreensaver amfora
+	sudo apt-get install -y i3 i3lock-fancy nitrogen pulseaudio-utils xterm calcurse arandr rofi xss-lock feh volumeicon-alsa polybar blueman flameshot meteo-qt pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit lxappearance vim nnn cmus xscreensaver amfora
 } 
 apply_configs () {
 	# this function applies the configs for: 
