@@ -1,12 +1,12 @@
 // -*- mode: json -*-
-// - - - waybar config for wiredWM - - - 
-//  should be stored at /etc/xdg/waybar/config
+
 {
 	"layer": "top",
 	"position": "top",
 
 	"modules-left": [
-		"sway/workspaces"
+		"sway/workspaces",
+		"sway/window"
 	],
 	"modules-center": [
 		"clock#1",
