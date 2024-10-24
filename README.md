@@ -123,3 +123,10 @@ We want it to be 1:1 with the x11 version, so when I'm comfy with using it as my
 
 ![image](https://github.com/user-attachments/assets/d8417ca3-10d5-4b1e-9645-956fbee058f1)
 
+### Wayland references
+
+Here are some great references to learn more about Wayland.
+
+- [Wayland freedesktop site](https://wayland.freedesktop.org/): The site for Wayland with documentation, FAQ, architecture overview, repos, mailing list, and more linked in.
+- [wayland-book](https://wayland-book.com): A great book from Drew Devault going over the Wayland protocol at a high-level.
+- [sway](https://swaywm.org): Sway is what we base the wayland version of wiredWM on top of. It is a drop-in replacement for i3, and will work with your config (you'll probably have to adapt a few tools, as we have) if you're coming over from x11.
