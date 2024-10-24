@@ -129,4 +129,5 @@ Here are some great references to learn more about Wayland.
 
 - [Wayland freedesktop site](https://wayland.freedesktop.org/): The site for Wayland with documentation, FAQ, architecture overview, repos, mailing list, and more linked in.
 - [wayland-book](https://wayland-book.com): A great book from Drew Devault going over the Wayland protocol at a high-level.
+- [We are wayland now!](https://wearewaylandnow.com/): A good little one-page site with a lot of resources listed, including desktops supporting wayland, screencasting tools, notification daemons, window managers, imagew viewers, and many more categories of software, so that if you are migrating to wayland, you can easily find an alternative to any x11 applications that don't (or don't plan to) support wayland.
 - [sway](https://swaywm.org): Sway is what we base the wayland version of wiredWM on top of. It is a drop-in replacement for i3, and will work with your config (you'll probably have to adapt a few tools, as we have) if you're coming over from x11.
