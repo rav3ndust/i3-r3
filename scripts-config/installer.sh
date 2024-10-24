@@ -37,13 +37,14 @@
 # - we use *meteo-qt* for displaying weather info in the i3bar.
 # - we also add *calcurse* for tracking appointments and `TODO`s in the terminal.
 # - - - - - - - - - - - - - - - 
-# wayland specific stuff
+# wayland-specific stuff
 # - we are using, of course, sway to base all of our wired configs on
 # - *swaybg* handles what nitrogen normally would, backgrounds/wallpapers
 # - *waybar*, heavily configured, handles our status bar needs
 # - *grimshot* and *flameshot* are both here
 # - *xdg-desktop-portal-wlr* handles wlroots desktop portals
 # - we have our wrapper around *swaylock* called *nslock* which is a custom lockscreen
+# - we include *wf-recorder* for recording the screen
 ########################################################
 i3_CONFIG_1_LOCATION="/etc/i3/config"
 i3_CONFIG_2_LOCATION="$HOME/.config/i3/config"
@@ -75,7 +76,7 @@ makeFolders () {
 install_wired_pkgs () {	
 	# this function updates and intalls the needed deps for wiredWM
 	sudo apt-get update
-	sudo apt-get install -y i3 i3lock-fancy nitrogen pulseaudio-utils xterm calcurse arandr rofi xss-lock feh volumeicon-alsa polybar blueman flameshot meteo-qt pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit lxappearance vim nnn cmus xscreensaver amfora sway swaylock swaybg grimshot xdg-desktop-portal-wlr qt5-ct waybar
+	sudo apt-get install -y i3 i3lock-fancy nitrogen pulseaudio-utils xterm calcurse arandr rofi xss-lock feh volumeicon-alsa polybar blueman dunst flameshot meteo-qt pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit lxappearance vim nnn cmus xscreensaver amfora sway swaylock swaybg grimshot xdg-desktop-portal-wlr qt5-ct waybar wf-recorder
 } 
 apply_configs () {
 	# this function applies the configs for: 
