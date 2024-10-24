@@ -67,7 +67,7 @@ makeFolders () {
 install_wired_pkgs () {	
 	# this function updates and intalls the needed deps for wiredWM
 	sudo apt-get update
-	sudo apt-get install -y i3 i3lock-fancy nitrogen pulseaudio-utils xterm calcurse arandr rofi xss-lock feh volumeicon-alsa polybar blueman flameshot meteo-qt pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit lxappearance vim nnn cmus xscreensaver amfora
+	sudo apt-get install -y i3 i3lock-fancy nitrogen pulseaudio-utils xterm calcurse arandr rofi xss-lock feh volumeicon-alsa polybar blueman flameshot meteo-qt pasystray ffmpeg kitty stterm surf conky suckless-tools lxpolkit lxappearance vim nnn cmus xscreensaver amfora sway swaylock swaybg grimshot xdg-desktop-portal-wlr qt5-ct waybar
 } 
 apply_configs () {
 	# this function applies the configs for: 
@@ -107,7 +107,16 @@ apply_configs () {
 	echo "Copying vim configs..."
 	sudo cp -f $WIRED_VIM_CONFIG $VIM_CONFIG
 	echo "Vim configs copied. You can change it at ~/.vimrc."
-	sleep 1
+	sleep 1 
+ 	apply_nslock() {
+  		# applies the nslock script to /usr/bin. is only used on wayland.
+		local nslock_script="$HOME/wiredWM/scripts-config/locker-scripts/nslock.sh"
+  		local nslock_exec_location="/usr/bin/nslock"
+    		echo "Applying nslock to $nslock_exec_location..."; sleep 1 
+  		chmod +x $nslock_script; sudo cp $nslock_script $nslock_exec_location
+    		echo "Done."; sleep 1
+  	}
+   	apply_nslock
 }
 wp_set () {
 	# this function uses nitrogen to set the default wallpaper.
