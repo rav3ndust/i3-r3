@@ -36,6 +36,14 @@
 # - we use *xss-lock* for an additional screen locking utility to run i3lock-fancy.
 # - we use *meteo-qt* for displaying weather info in the i3bar.
 # - we also add *calcurse* for tracking appointments and `TODO`s in the terminal.
+# - - - - - - - - - - - - - - - 
+# wayland specific stuff
+# - we are using, of course, sway to base all of our wired configs on
+# - *swaybg* handles what nitrogen normally would, backgrounds/wallpapers
+# - *waybar*, heavily configured, handles our status bar needs
+# - *grimshot* and *flameshot* are both here
+# - *xdg-desktop-portal-wlr* handles wlroots desktop portals
+# - we have our wrapper around *swaylock* called *nslock* which is a custom lockscreen
 ########################################################
 i3_CONFIG_1_LOCATION="/etc/i3/config"
 i3_CONFIG_2_LOCATION="$HOME/.config/i3/config"
