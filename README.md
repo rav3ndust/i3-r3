@@ -127,6 +127,7 @@ We want it to be 1:1 with the x11 version, so when I'm comfy with using it as my
 
 Here are some great references to learn more about Wayland.
 
+- [Wayland wikipedia enrey](https://en.wikipedia.org/wiki/Wayland_(protocol)): A dive into wayland on wikipedia.
 - [Wayland freedesktop site](https://wayland.freedesktop.org/): The site for Wayland with documentation, FAQ, architecture overview, repos, mailing list, and more linked in.
 - [wayland-book](https://wayland-book.com): A great book from Drew Devault going over the Wayland protocol at a high-level.
 - [We are wayland now!](https://wearewaylandnow.com/): A good little one-page site with a lot of resources listed, including desktops supporting wayland, screencasting tools, notification daemons, window managers, imagew viewers, and many more categories of software, so that if you are migrating to wayland, you can easily find an alternative to any x11 applications that don't (or don't plan to) support wayland.
