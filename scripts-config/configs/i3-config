@@ -11,6 +11,13 @@
 
 set $mod Mod4
 
+# - - - this is sway specific: - - -
+# XXX it is also being tested, so comment it out when not using it. 
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway
+exec systemctl --user import-environment
+exec swaybg -i $HOME/wiredWM/wp/lain-twin.png &
+#exec killall swaybar; waybar &
+
 # make windows float by default.
 # comment/uncomment the below line to disable/enable tiling by default.
 #for_window [class="[.]*"] floating enable
@@ -25,7 +32,7 @@ smart_gaps on
 smart_borders on
 # - - manual gaps.
 # You can manually adjust their values below, if you choose to set them.
-gaps inner 7
+#gaps inner 7
 #gaps outer 5 
 
 #for_window [class=".*"] border pixel 2 gaps inner 50 gaps outer 20 
@@ -94,9 +101,9 @@ exec --no-startup-id xcompmgr
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status && notify-send "wired helper" "volume +10"
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status && notify-send "wired helper" "volume -10"
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status && notify-send "wired helper" "volume muted" 
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -104,9 +111,9 @@ floating_modifier $mod
 
 # start a terminal.
 # Our four installed terminal emulators are "st", "xterm", "kitty" and "alacritty." Each are lightweight.
-#bindsym $mod+Return exec st
+bindsym $mod+Return exec st
 #bindsym $mod+Return exec kitty
-bindsym $mod+Return exec alacritty
+#bindsym $mod+Return exec alacritty
 #bindsym $mod+Return exec xterm
 
 # kill focused window
@@ -136,6 +143,9 @@ bindsym $mod+Shift+n exec --no-startup-id "dunstctl history-pop"
 
 # add a shortcut for popping the calendar
 bindsym $mod+c exec --no-startup-id "gsimplecal"
+
+# add a popup notification showing when Caps_Lock has been pressed
+bindsym Caps_Lock exec --no-startup-id "notify-send 'wired helper' 'Caps Lock pressed.'"
 
 # change focus
 bindsym $mod+j focus left
