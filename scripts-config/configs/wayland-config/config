@@ -1,6 +1,5 @@
 // -*- mode: json -*-
 // waybar config for wiredWM
-// it is stored at /etc/xdg/waybar/config
 {
 	"layer": "top",
 	"position": "top",
@@ -17,21 +16,21 @@
 	"modules-right": [
 		"pulseaudio",
 		"memory",
-		"cpu",
+		//"cpu",
 		"battery",
 		"disk",
 		"tray"
 	],
 
 	"sway/workspaces": {
-		"disable-scroll": true,
+		"disable-scroll": false,
 		"format": "{name}"
 	},
 
 	"clock#1": {
 		"format": "{:%a}",
 		"tooltip": false,
-		"on-click": "gsimplecal"
+		"on-click": "st -e calcurse"
 	},
 	"clock#2": {
 		"format": "{:%H:%M}",
@@ -88,6 +87,6 @@
 		"path": "/"
 	},
 	"tray": {
-		"icon-size": 20
+		"icon-size": 20 
 	}
 }
