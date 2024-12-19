@@ -7,8 +7,8 @@
 window#waybar {
     background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
     color: #fdf6e3;
-    padding: 0;
-    margin: 0;
+    padding: -0;
+    margin: -0;
 }
 
 #custom-right-arrow-dark,
@@ -30,8 +30,8 @@ window#waybar {
 #disk,
 #tray {
     background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
-    border-radius: 15px; /* Rounded corners for pill effect */
-    padding: 3px 8px; /* Padding for a comfortable look */
+    border-radius: 10px; /* Rounded corners for pill effect */
+    padding: 3px 7px; /* Padding for a comfortable look */
     margin: 0 3px; /* Margin between modules */
     color: #fdf6e3; /* Default text color */
     font-size: 10px; /* Ensure text size is consistent */
@@ -42,10 +42,10 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 3px 8px; /* Padding for buttons */
+    padding: 0px 8px; /* Padding for buttons */
     color: #fdf6e3; /* Default text color */
     background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for buttons */
-    border-radius: 15px; /* Rounded corners for pill effect */
+    border-radius: 12px; /* Rounded corners for pill effect */
     transition: background 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
 }
 
