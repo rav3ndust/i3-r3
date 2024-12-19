@@ -7,6 +7,8 @@
 window#waybar {
     background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
     color: #fdf6e3;
+    padding: 0;
+    margin: 0;
 }
 
 #custom-right-arrow-dark,
