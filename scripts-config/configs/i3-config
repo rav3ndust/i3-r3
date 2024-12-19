@@ -121,13 +121,13 @@ bindsym $mod+Shift+q kill
 
 # start applications and run commands (your choice of dmenu or rofi)
 # start dmenu (a program launcher) - nightshade customized dmenu
-bindsym $mod+d exec dmenu_run -fn "Quicksand-10" -nb black -nf pink -sb green -sf red -p "nightshade - run command: "
+bindsym $mod+d exec dmenu_run -fn "Quicksand-10" -nb black -nf pink -sb green -sf red -p "nightshade - run command: " -b
 # rofi version of the above
 #bindsym $mod+d exec --no-startup-id "rofi -show run -theme purple -font 'Quicksand Bold 10'"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Quicksand-10" -i -nb black -nf pink -sb green -sf red -p "nightshade - Applications List: "'
+bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Quicksand-10" -b -i -nb black -nf pink -sb green -sf red -p "nightshade - Applications List: "' 
 # rofi version of the above.
 #bindsym $mod+Shift+a exec --no-startup-id "rofi -show drun -theme purple -font 'Quicksand Bold 10'"
 
